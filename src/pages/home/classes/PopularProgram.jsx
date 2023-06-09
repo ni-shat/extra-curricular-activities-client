@@ -1,6 +1,5 @@
 
 import '../../../index.css';
-import SwiperCustom from './SwiperCustom';
 import SwiperPrograms from './SwiperPrograms';
 
 

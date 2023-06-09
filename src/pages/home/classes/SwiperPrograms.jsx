@@ -1,19 +1,21 @@
 import React, { useRef, useState } from "react";
-// Import Swiper React components
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/swiper.min.css';
 
-// Import Swiper styles
+
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 
 import "./styles.css";
-
-// import required modules
 import { FreeMode, Pagination } from "swiper";
+
+
 import usePopularClasses from "../../../hooks/usePopularClasses";
 import { FaArrowRight } from 'react-icons/fa';
+
+
 
 const SwiperPrograms = () => {
 
