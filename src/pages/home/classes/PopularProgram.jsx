@@ -19,9 +19,6 @@ const PopularProgram = () => {
                {/* <SwiperCustom></SwiperCustom> */}
                <SwiperPrograms></SwiperPrograms>
             </div>
-            <div className='mt-40'>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam distinctio itaque repudiandae voluptatem, magnam quidem eaque sunt enim beatae commodi quos earum eius adipisci maiores corporis. Error nesciunt tempora earum?
-            </div>
         </div>
     );
 };
