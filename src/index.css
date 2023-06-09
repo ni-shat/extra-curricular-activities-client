@@ -22,6 +22,18 @@
     font-size: 94px;
 }
 
+.font-monoton-xl {
+    font-family: 'Monoton', cursive;
+    font-weight: 300;
+    font-size: 170px;
+}
+
+.font-monoton-lg {
+    font-family: 'Monoton', cursive;
+    font-weight: 300;
+    font-size: 150px;
+}
+
 .font-roboto {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;

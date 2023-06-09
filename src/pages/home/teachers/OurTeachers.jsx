@@ -71,22 +71,13 @@ const OurTeachers = () => {
                     </div>
                 </div>
             </div>
-            <div className='-mt-4 flex'>
+            <div className='-mt-10 flex items-center justify-between'>
                 <h3 className='font-monoton  opacity-10 text-gray-500  whitespace-nowrap'> <span>Popular </span>  <span>instructor</span> </h3>
-                {/* <div className='relative w-full'>
-                    <div className='absolute -top-5 right-14'>
-                        <div className='flex items-center '>
-                        <div className='bg-slate-200 h-32 w-32 rounded-full uppercase text-left flex justify-end items-center text-xl font-roboto-bold gap-1'>
-                            See all 
-                        </div> <FaArrowRight/>
-                        </div>
-                        
-                        <div className='text-transparent bg-red-600 w-10 h-10 rounded-full absolute -top-0 right-20'>
-                            circle
-                        </div>
-                    </div>
-
-                </div> */}
+                <div className='mr-20'>
+                    <button className='btn btn-lg bg-transparent border-2  rounded-full text-gray-800 hover:bg-white hover:text-red-600'>
+                        view more 
+                    </button>
+                </div>
             </div>
             <TeacherSlider></TeacherSlider>
 

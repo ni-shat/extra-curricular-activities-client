@@ -1,10 +1,15 @@
 import React from 'react';
 import logo from '../../../assets/logo2x.png'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
 
-    const navitems = <>
+    const location = useLocation();
+    console.log(location)
+    console.log(location.pathname)
+
+    const navitems = 
+    <>
         <li className='text-base'><Link to='/'>Home</Link></li>
         <li className='text-base'><Link to='/'>Classes</Link></li>
         <li className='text-base'><Link to='/'>Instructors</Link></li>
@@ -14,7 +19,7 @@ const Navbar = () => {
 
     return (
 
-        <div className="navbar bg-transparent text-white font-semibold my-0 w-full">
+        <div className={`${(location.pathname==('/login') || location.pathname==('/signup')) ? 'bg-gray-800' : 'bg-transparent'} navbar text-white font-semibold my-0 w-full`}>
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -32,10 +37,10 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to='/login' className="btn px-10 bg-[#C20909] text-white border-0 font-bold rounded-full">Login</Link>
+                <Link to='/login' className="btn px-10 bg-[#C20909] text-white border-0  
+                  hover:bg-gray-50 hover:bg-opacity-20 font-bold rounded-full">Login</Link>
             </div>
         </div>
-
 
 
     );
