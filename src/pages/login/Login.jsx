@@ -7,6 +7,7 @@ import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
+import Footer from '../shared/footer/Footer';
 
 const Login = () => {
 
@@ -88,6 +89,7 @@ const Login = () => {
 
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 };

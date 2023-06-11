@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import GoogleLogin from '../shared/social-login/GoogleLogin';
 import { Helmet } from 'react-helmet';
+import Footer from '../shared/footer/Footer';
 
 
 const SignUp = () => {
@@ -78,10 +79,8 @@ const SignUp = () => {
             <h3 className='font-monoton-lg opacity-10 text-gray-500  whitespace-nowrap text-center -rotate-90 absolute -left-52 top-[42%] '>Signup</h3>
 
             <Navbar></Navbar>
-            <div className="pt-14  bg-white">
-
+            <div className="pt-14 pb-20  bg-white">
                 <div className="flex w-[80%] mx-auto items-center justify-center ">
-
                     <div className='w-[65%]'>
                         <div className="card w-full pb-10  flex-shrink-0 shadow-2xl bg-base-100  ">
                             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
@@ -180,6 +179,7 @@ const SignUp = () => {
 
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 };
