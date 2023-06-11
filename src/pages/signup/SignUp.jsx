@@ -6,6 +6,7 @@ import { AuthContext } from '../../providers/AuthProvider';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import GoogleLogin from '../shared/social-login/GoogleLogin';
+import { Helmet } from 'react-helmet';
 
 
 const SignUp = () => {
@@ -70,11 +71,13 @@ const SignUp = () => {
 
     return (
         <div className='bg-[../../assets/bg-signup.svg] bg-cover bg-center h-screen'>
+             <Helmet>
+                <title>Music School | Signup</title>
+            </Helmet>
 
             <h3 className='font-monoton-lg opacity-10 text-gray-500  whitespace-nowrap text-center -rotate-90 absolute -left-52 top-[42%] '>Signup</h3>
 
             <Navbar></Navbar>
-            {/* <img src={bg} alt="" /> */}
             <div className="pt-14  bg-white">
 
                 <div className="flex w-[80%] mx-auto items-center justify-center ">
@@ -107,13 +110,12 @@ const SignUp = () => {
                                         <input type="password"  {...register("password", {
                                             required: true,
                                             minLength: 6,
-                                            maxLength: 20,
-                                            pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
+                                            pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/
                                         })} placeholder="password" className="input input-bordered border-2 border-gray-200 shadow-sm" />
                                         {errors.password?.type === 'required' && <p className="text-red-600">Password is required</p>}
                                         {errors.password?.type === 'minLength' && <p className="text-red-600">Password must be 6 characters</p>}
                                         {errors.password?.type === 'maxLength' && <p className="text-red-600">Password must be less than 20 characters</p>}
-                                        {errors.password?.type === 'pattern' && <p className="text-red-600">Password must have one Uppercase one lower case, one number and one special character.</p>}
+                                        {errors.password?.type === 'pattern' && <p className="text-red-600">Password must have one Uppercase, one number and one special character.</p>}
                                     </div>
                                     <div className="form-control w-2/4">
                                         <label className="label">

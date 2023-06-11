@@ -1,13 +1,48 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import img from '../../assets/guiter.svg';
 import Navbar from '../shared/navbar/Navbar';
-import { Link } from 'react-router-dom';
-import ggl from '../../assets/ggl.png'
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import GoogleLogin from '../shared/social-login/GoogleLogin';
+import { Helmet } from 'react-helmet';
+import { useForm } from 'react-hook-form';
+import { AuthContext } from '../../providers/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Login = () => {
+
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { signIn } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+    const onSubmit = data => {
+
+        console.log(data)
+        signIn(data.email, data.password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                reset();
+                Swal.fire({
+                    title: 'User Login Successful.',
+                    showClass: {
+                        popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animate__animated animate__fadeOutUp'
+                    }
+                });
+                navigate(from, { replace: true });
+            })
+    };
+
+
     return (
         <div>
+            <Helmet>
+                <title>Music School | Login</title>
+            </Helmet>
 
             <h3 className='font-monoton-xl opacity-10 text-gray-500  whitespace-nowrap text-center -rotate-90 absolute -left-48 top-[40%] '>login</h3>
 
@@ -21,18 +56,20 @@ const Login = () => {
                     </div>
                     <div className='w-[60%] flex justify-end'>
                         <div className="card w-full max-w-md pb-10  flex-shrink-0 shadow-2xl bg-base-100  ">
-                            <div className="card-body">
+                            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Email</span>
                                     </label>
-                                    <input type="text" placeholder="email" className="input input-bordered" />
+                                    <input type="text" {...register("email", { required: true })} placeholder="email" className="input input-bordered" />
+                                    {errors.name && <span className="text-red-600">Name is required</span>}
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Password</span>
                                     </label>
-                                    <input type="text" placeholder="password" className="input input-bordered" />
+                                    <input type="password" {...register("password", { required: true })} placeholder="password" className="input input-bordered" />
+                                    {errors.password && <span className="text-red-600">Password is required</span>}
                                     <label className="label">
                                         <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                     </label>
@@ -45,7 +82,7 @@ const Login = () => {
                                     <Link to='/signup'>Don't Have an account? <span className='text-red-600 font-bold'>Sign up</span></Link>
                                 </div>
 
-                            </div>
+                            </form>
                         </div>
                     </div>
 
