@@ -4,6 +4,7 @@ import PopularProgram from '../classes/PopularProgram';
 import { Helmet } from 'react-helmet';
 import Services from '../services/Services';
 import OurTeachers from '../teachers/OurTeachers';
+import Footer from '../../shared/footer/Footer';
 
 
 const Home = () => {
@@ -18,10 +19,11 @@ const Home = () => {
             </div>
             <Services></Services>
             <OurTeachers></OurTeachers>
-            {/* TODO */}
-            <div className='mt-40 text-white'>
+             {/* TODO rmove the div*/}
+             <div className='mt-40 text-white'>
                 something
             </div>
+            <Footer></Footer>
         </div>
     );
 };
