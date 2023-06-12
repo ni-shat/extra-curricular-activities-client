@@ -8,6 +8,7 @@ const SelectedClasses = () => {
     const [selectedClasses] = useSelectedClasses();
     console.log(selectedClasses)
 
+
     return (
         <div className='w-full pl-16 pr-20'>
             <div className="overflow-x-auto ">
