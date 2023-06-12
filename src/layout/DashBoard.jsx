@@ -5,11 +5,13 @@ import logo from '../assets/logo-black.svg'
 import NavbarDashboard from "../pages/dashboard/navbar/NavbarDashboard";
 import ULStudents from "../pages/dashboard/student-dashboard/ul/ULStudents";
 import ULAdmin from "../pages/dashboard/admin-dashboard/ul/ULAdmin";
+import useAdmin from "../hooks/useAdmin";
 
 const DashBoard = () => {
 
     const isStudent = false;
-    const asAdmin = true;
+    const [isAdmin] = useAdmin();
+    console.log(isAdmin)
 
 
     return (
@@ -32,7 +34,7 @@ const DashBoard = () => {
                         isStudent && <ULStudents></ULStudents>
                     }
                     {
-                        asAdmin && <ULAdmin></ULAdmin>
+                        isAdmin && <ULAdmin></ULAdmin>
                     }
                     {/* {
                         asAdmin && <ULAdmin></ULAdmin>

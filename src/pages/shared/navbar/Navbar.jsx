@@ -48,10 +48,6 @@ const Navbar = () => {
                     {navitems}
                 </ul>
             </div>
-            {/* <div className="navbar-end">
-                <Link to='/login' className="btn px-10 bg-[#C20909] text-white border-0  
-                  hover:bg-gray-50 hover:bg-opacity-20 font-bold rounded-full">Login</Link>
-            </div> */}
             <div className="navbar-end">
                 <div className='md:flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-5 md:items-center hidden '>
                     {
@@ -62,7 +58,7 @@ const Navbar = () => {
                                     <>
                                         <div className="tooltip tooltip-bottom" data-tip={user.displayName}>
                                             {
-                                                user.photoURL ? <img className='rounded-full w-12 h-12 object-cover' src={user.photoURL} alt="" />
+                                                user.photoURL ? <img className='rounded-full w-11 h-11 object-cover' src={user.photoURL} alt="" />
                                                     : <FaUserCircle className='w-10 h-10 text-gray-500' />
                                             }
                                         </div>
@@ -83,7 +79,7 @@ const Navbar = () => {
                             user ? <button onClick={handleLogOut} className='btn px-10 bg-[#C20909] text-white border-0  
                             hover:bg-gray-50 hover:bg-opacity-20 font-bold rounded-full'>Log out</button>
                                 :
-                                <Link to='/auth-layout/login'><button className='btn px-10 bg-[#C20909] text-white border-0  
+                                <Link to='/login'><button className='btn px-10 bg-[#C20909] text-white border-0  
                                 hover:bg-gray-50 hover:bg-opacity-20 font-bold rounded-full'>Login</button></Link>
                         }
                     </div>
