@@ -13,6 +13,7 @@ import UserHome from "../pages/dashboard/user-home/UserHome";
 import SelectedClasses from "../pages/dashboard/student-dashboard/selected-classes/SelectedClasses";
 import EnrolledClasses from "../pages/dashboard/student-dashboard/enrolled-classes/EnrolledClasses";
 import DashBoard from "../layout/DashBoard";
+import AllUsers from "../pages/dashboard/admin-dashboard/all-users/AllUsers";
 
 
 export const router = createBrowserRouter([
@@ -54,11 +55,11 @@ export const router = createBrowserRouter([
         {
           path: 'enrolled-classes',
           element: <EnrolledClasses></EnrolledClasses>
-        }
-        // {
-        //   path: 'mycart', 
-        //   element: <MyCart></MyCart>
-        // },
+        },
+        {
+          path: 'manage-users', 
+          element: <AllUsers></AllUsers>
+        },
         // {
         //   path:'payment',
         //   element: <Payment></Payment>

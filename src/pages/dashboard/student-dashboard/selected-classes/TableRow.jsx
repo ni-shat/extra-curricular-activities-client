@@ -6,9 +6,10 @@ import useSelectedClasses from '../../../../hooks/useSelectedClasses';
 const TableRow = ({ selectedCls, index }) => {
 
     const {_id, title, image, schedule, instructor, price} = selectedCls;
-    const [ , refetch] = useSelectedClasses();
+    const [, , refetch] = useSelectedClasses();
+    console.log(refetch)
 
-    const handleDelete = id => {
+    const handleDelete = cls => {
 
         Swal.fire({
             title: 'Are you sure?',
@@ -23,12 +24,12 @@ const TableRow = ({ selectedCls, index }) => {
 
                 if (result.isConfirmed) {
 
-                    fetch(`http://localhost:5000/selected-classes/${id}`, {
+                    fetch(`http://localhost:5000/selected-classes/${cls._id}`, {
                         method: 'DELETE'
                     })
                         .then(res => res.json())
                         .then(data => {
-                            console.log(data);
+                            console.log("Nishat data",data);
                             if (data.deletedCount > 0) {
                                 refetch();
                                 Swal.fire(
@@ -69,7 +70,7 @@ const TableRow = ({ selectedCls, index }) => {
             <td>{price}</td>
             <th className='flex flex-col gap-2 justify-center items-start'>
                 <button className="btn btn-ghost btn-outline btn-xs text-green-600"><FaMoneyCheckAlt/> pay</button>
-                <button onClick={() => handleDelete(_id)} className="btn btn-ghost btn-outline btn-xs text-red-700"><FaTrash/> Delete</button>
+                <button onClick={() => handleDelete(selectedCls)} className="btn btn-ghost btn-outline btn-xs text-red-700"><FaTrash/> Delete</button>
             </th>
         </tr>
     );

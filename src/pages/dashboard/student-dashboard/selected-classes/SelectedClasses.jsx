@@ -1,12 +1,14 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import useSelectedClasses from '../../../../hooks/useSelectedClasses';
 import TableRow from './TableRow';
 
 
 const SelectedClasses = () => {
 
+    // const [selected_cls, setSelected_cls] = useState();
     const [selectedClasses] = useSelectedClasses();
-    console.log(selectedClasses)
+    // console.log(selectedClasses)
+   
 
 
     return (
