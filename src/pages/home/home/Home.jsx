@@ -13,17 +13,18 @@ const Home = () => {
             <Helmet>
                 <title>Music School | Home</title>
             </Helmet>
+            
             <Banner></Banner>
             <div className='w-[90%] mx-auto text-gray-800'>
                 <PopularProgram></PopularProgram>
             </div>
             <Services></Services>
             <OurTeachers></OurTeachers>
+
              {/* TODO rmove the div*/}
              <div className='mt-40 text-white'>
                 something
             </div>
-            <Footer></Footer>
         </div>
     );
 };

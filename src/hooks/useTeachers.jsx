@@ -5,7 +5,7 @@ const useTeachers = () => {
     const {data: getTeachers = [], isLoading: loading, refetch} = useQuery({
         queryKey: ['teachers'],
         queryFn: async() => {
-            const res = await fetch('http://localhost:5000/instructors');
+            const res = await fetch('http://localhost:5000/all-instructors');
             return res.json();
         }
     })

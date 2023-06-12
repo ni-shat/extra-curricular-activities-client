@@ -8,7 +8,10 @@ const Instructors = () => {
 
     const [getTeachers] = useTeachers();
     console.log(getTeachers);
+
     const [pageNumbers, setPageNumbers] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [teachers, setTeachers] = useState([])
 
     useEffect(() => {
         if (getTeachers.length > 0) {
@@ -17,6 +20,16 @@ const Instructors = () => {
             setPageNumbers([...Array(totalPages).keys()]);
         }
     }, [getTeachers])
+
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch(`http://localhost:5000/instructors?page=${currentPage}`);
+
+            const data = await response.json();
+            setTeachers(data);
+        }
+        fetchData();
+    }, [currentPage]);
 
 
     return (
@@ -38,14 +51,21 @@ const Instructors = () => {
 
             {/* teachers section */}
             {
-                getTeachers?.map(t => <Instructor key={t._id} teacher={t}></Instructor>)
+                teachers?.map(t => <Instructor key={t._id} teacher={t}></Instructor>)
             }
 
 
             {/* pagination */}
             <div className="text-center mb-5">
                 {
-                    pageNumbers.map(numb => <button className='btn btn-xs mx-2 text-white' key={numb}>{numb}</button>)
+                    pageNumbers.map(numb =>
+                        <button
+                            onClick={() => setCurrentPage(numb)}
+                            className={`btn btn-xs mx-2 text-white ${currentPage === numb ? "selected" : ""} `}
+                            key={numb}>
+                            {numb+1}
+                        </button>
+                    )
                 }
             </div>
         </div>
