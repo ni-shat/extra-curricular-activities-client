@@ -60,19 +60,19 @@ const Login = () => {
                             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text">Email</span>
+                                        <span className="text-gray-800">Email</span>
                                     </label>
-                                    <input type="text" {...register("email", { required: true })} placeholder="email" className="input input-bordered" />
+                                    <input type="text" {...register("email", { required: true })} placeholder="email" className="input input-bordered border-gray-700 border" />
                                     {errors.name && <span className="text-red-600">Name is required</span>}
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text">Password</span>
+                                        <span className="text-gray-800">Password</span>
                                     </label>
-                                    <input type="password" {...register("password", { required: true })} placeholder="password" className="input input-bordered" />
+                                    <input type="password" {...register("password", { required: true })} placeholder="password" className="input input-bordered border-gray-700 border" />
                                     {errors.password && <span className="text-red-600">Password is required</span>}
                                     <label className="label">
-                                        <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                        <a href="#" className="text-gray-500 link link-hover">Forgot password?</a>
                                     </label>
                                 </div>
                                 <div className="form-control mt-6">

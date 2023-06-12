@@ -89,14 +89,14 @@ const SignUp = () => {
                                         <label className="label">
                                             <span className="text-gray-800">Name</span>
                                         </label>
-                                        <input type="text"  {...register("name", { required: true })} name="name" placeholder="Name" className="input input-bordered border-2 border-gray-200 shadow-sm" />
+                                        <input type="text"  {...register("name", { required: true })} name="name" placeholder="Name" className="input input-bordered border-gray-700 border shadow-sm" />
                                         {errors.name && <span className="text-red-600">Name is required</span>}
                                     </div>
                                     <div className="form-control w-2/4">
                                         <label className="label">
                                             <span className="text-gray-800">Email</span>
                                         </label>
-                                        <input type="email"  {...register("email", { required: true })} name="email" placeholder="email" className="input input-bordered border-2 border-gray-200 shadow-sm" />
+                                        <input type="email"  {...register("email", { required: true })} name="email" placeholder="email" className="input input-bordered border-gray-700 border shadow-sm" />
                                         {errors.email && <span className="text-red-600">Email is required</span>}
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@ const SignUp = () => {
                                             required: true,
                                             minLength: 6,
                                             pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/
-                                        })} placeholder="password" className="input input-bordered border-2 border-gray-200 shadow-sm" />
+                                        })} placeholder="password" className="input input-bordered border-gray-700 border shadow-sm" />
                                         {errors.password?.type === 'required' && <p className="text-red-600">Password is required</p>}
                                         {errors.password?.type === 'minLength' && <p className="text-red-600">Password must be 6 characters</p>}
                                         {errors.password?.type === 'maxLength' && <p className="text-red-600">Password must be less than 20 characters</p>}
@@ -123,7 +123,7 @@ const SignUp = () => {
                                         <input type="password"  {...register("confirmPassword", {
                                             required: true,
                                             validate: (value) => value === password || 'Passwords do not match',
-                                        })} placeholder="confirm password" className="input input-bordered border-2 border-gray-200 shadow-sm" />
+                                        })} placeholder="confirm password" className="input input-bordered border-gray-700 border shadow-sm" />
                                         {errors.confirmPassword && <p className="text-red-600">{errors.confirmPassword.message}</p>}
                                     </div>
                                 </div>
@@ -133,14 +133,14 @@ const SignUp = () => {
                                         <label className="label">
                                             <span className="text-gray-800">Photo URL</span>
                                         </label>
-                                        <input type="text"  {...register("photoURL", { required: true })} placeholder="url" className="input input-bordered border-2 border-gray-200 shadow-sm" />
+                                        <input type="text"  {...register("photoURL", { required: true })} placeholder="url" className="input input-bordered border-gray-700 border shadow-sm" />
                                         {errors.photoURL && <span className="text-red-600">Photo URL is required</span>}
                                     </div>
                                     <div className="form-control w-2/4">
                                         <label className="label">
                                             <span className="text-gray-800">Gender</span>
                                         </label>
-                                        <input type="text"  {...register("gender", { required: true })} placeholder="gender" className="input input-bordered border-2 border-gray-200 shadow-sm" />
+                                        <input type="text"  {...register("gender", { required: true })} placeholder="gender" className="input input-bordered border-gray-700 border shadow-sm" />
                                         {errors.gender && <span className="text-red-600">Gender is required</span>}
                                     </div>
                                 </div>
@@ -149,14 +149,14 @@ const SignUp = () => {
                                         <label className="label">
                                             <span className="text-gray-800">Phone number</span>
                                         </label>
-                                        <input type="text"  {...register("phone", { required: true })} placeholder="phone number" className="input input-bordered border-2 border-gray-200 shadow-sm" />
+                                        <input type="text"  {...register("phone", { required: true })} placeholder="phone number" className="input input-bordered border-gray-700 border shadow-sm" />
                                         {errors.phone && <span className="text-red-600">Phone number is required</span>}
                                     </div>
                                     <div className="form-control w-2/4">
                                         <label className="label">
                                             <span className="text-gray-800">Address</span>
                                         </label>
-                                        <input type="text"  {...register("address", { required: true })} placeholder="address" className="input input-bordered border-2 border-gray-200 shadow-sm" />
+                                        <input type="text"  {...register("address", { required: true })} placeholder="address" className="input input-bordered border-gray-700 border shadow-sm" />
                                         {errors.address && <span className="text-red-600">Address is required</span>}
                                     </div>
                                 </div>

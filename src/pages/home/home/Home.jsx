@@ -3,7 +3,7 @@ import Banner from '../banner/Banner';
 import PopularProgram from '../classes/PopularProgram';
 import { Helmet } from 'react-helmet';
 import Services from '../services/Services';
-import OurTeachers from '../teachers/OurTeachers';
+import OurTeachers from '../popular-instructors/OurTeachers';
 import Footer from '../../shared/footer/Footer';
 
 
