@@ -40,7 +40,7 @@ const Login = () => {
 
 
     return (
-        <div>
+        <div className='reltive'>
             <Helmet>
                 <title>Music School | Login</title>
             </Helmet>
@@ -48,7 +48,7 @@ const Login = () => {
             <h3 className='font-monoton-xl opacity-10 text-gray-500  whitespace-nowrap text-center -rotate-90 absolute -left-48 top-[40%] '>login</h3>
 
             <Navbar></Navbar>
-            <div className="pt-14 min-h-screen bg-white">
+            <div className="pt-44 min-h-screen bg-white">
 
                 <div className="flex w-[80%] mx-auto flex-col lg:flex-row-reverse  items-center justify-center ">
                     <div className="text-center lg:text-center  w-[50%]  flex flex-row-reverse items-center justify-center">

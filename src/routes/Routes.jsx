@@ -9,6 +9,10 @@ import Error from "../pages/error/Error";
 import Instructors from "../pages/instructors/Instructors";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../layout/Dashoard";
+import UserHome from "../pages/dashboard/user-home/UserHome";
+import SelectedClasses from "../pages/dashboard/student-dashboard/selected-classes/SelectedClasses";
+import EnrolledClasses from "../pages/dashboard/student-dashboard/enrolled-classes/EnrolledClasses";
+import DashBoard from "../layout/DashBoard";
 
 
 export const router = createBrowserRouter([
@@ -22,7 +26,7 @@ export const router = createBrowserRouter([
         },  
         {
           path: 'login',
-          element: <PrivateRoute><Login></Login></PrivateRoute>
+          element: <Login></Login>
         },
         {
           path: 'signup',
@@ -36,37 +40,46 @@ export const router = createBrowserRouter([
     },
     {
       path: 'dashboard',
-      element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>, 
+      // element: <Dashboard></Dashboard>, 
+      element: <DashBoard></DashBoard>,
       children: [
         {
           path: 'userhome',
           element: <UserHome></UserHome>
         },
         {
-          path: 'mycart', 
-          element: <MyCart></MyCart>
+          path: 'selected-classes',
+          element: <SelectedClasses></SelectedClasses>
         },
         {
-          path:'payment',
-          element: <Payment></Payment>
-        },
-        // admin routes
-        {
-          path: 'adminhome',
-          element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
-        },
-        {
-          path: 'allusers', 
-          element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
-        },
-        {
-          path: 'addItem',
-          element: <AdminRoute><AddItem></AddItem></AdminRoute>
-        },
-        {
-          path: 'manageitems',
-          element: <AdminRoute><ManageItems></ManageItems></AdminRoute>
+          path: 'enrolled-classes',
+          element: <EnrolledClasses></EnrolledClasses>
         }
+        // {
+        //   path: 'mycart', 
+        //   element: <MyCart></MyCart>
+        // },
+        // {
+        //   path:'payment',
+        //   element: <Payment></Payment>
+        // },
+        // // admin routes
+        // {
+        //   path: 'adminhome',
+        //   element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
+        // },
+        // {
+        //   path: 'allusers', 
+        //   element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+        // },
+        // {
+        //   path: 'addItem',
+        //   element: <AdminRoute><AddItem></AddItem></AdminRoute>
+        // },
+        // {
+        //   path: 'manageitems',
+        //   element: <AdminRoute><ManageItems></ManageItems></AdminRoute>
+        // }
       ]
     },
     {

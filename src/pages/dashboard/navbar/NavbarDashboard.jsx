@@ -1,27 +1,21 @@
 import React from 'react';
-import logo from '../../../assets/logo2x.png'
-import { Link, useLocation } from 'react-router-dom';
+import ActiveLink from '../../../components/ActiveLink';
+import { Link } from 'react-router-dom';
 
-const Navbar = () => {
-
-    const location = useLocation();
-    console.log(location)
-    console.log(location.pathname)
+const NavbarDashboard = () => {
 
     const navitems = 
     <>
-        <li className='text-base'><Link to='/'>Home</Link></li>
-        <li className='text-base'><Link to='/'>Classes</Link></li>
-        <li className='text-base'><Link to='/instructors'>Instructors</Link></li>
-        <li className='text-base'><Link to='/dashboard/userhome'>Dashboard</Link></li>
+        <li className='text-base'><ActiveLink to='/'>Home</ActiveLink></li>
+        <li className='text-base'><ActiveLink to='/'>Classes</ActiveLink></li>
+        <li className='text-base'><ActiveLink to='/instructors'>Instructors</ActiveLink></li>
+        <li className='text-base'><ActiveLink to='/dashboard/userhome'>Dashboard</ActiveLink></li>
     </>
 
 
     return (
-
-        <div 
-        className={`${(location.pathname==('/login') || location.pathname==('/signup')) ? 'bg-gray-800 absolute top-0 z-10' : 'bg-transparent'}
-         navbar text-white font-semibold my-0 w-full`}
+        <div
+            className={`navbar text-black font-semibold my-0 w-full`}
         >
             <div className="navbar-start">
                 <div className="dropdown">
@@ -32,7 +26,6 @@ const Navbar = () => {
                         {navitems}
                     </ul>
                 </div>
-                <Link to='/'><img className='w-[18%]' src={logo} alt="" /></Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -44,16 +37,7 @@ const Navbar = () => {
                   hover:bg-gray-50 hover:bg-opacity-20 font-bold rounded-full">Login</Link>
             </div>
         </div>
-
-
     );
 };
 
-export default Navbar;
-
-/***
- * Home, Instructors, Classes, Dashboard and User profile picture.
- * <div className='my-10 mx-10'>
-            <img className='w-[18%]' src={logo} alt="" />
-        </div> 
- */
+export default NavbarDashboard;
