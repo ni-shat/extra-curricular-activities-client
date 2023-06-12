@@ -20,6 +20,7 @@ import { FaArrowRight } from 'react-icons/fa';
 const SwiperPrograms = () => {
 
     const [popularClasses] = usePopularClasses();
+    console.log(popularClasses)
     const [zoomed, setZoomed] = useState(false);
 
     const toggleZoom = () => {

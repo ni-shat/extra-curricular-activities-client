@@ -3,24 +3,23 @@ import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import useAxiosSecure from "./useAxiosSecure";
 
-const useSelectedClasses = () => {
+const useAllClasses_Instructor = () => {
 
     const { user, loading } = useContext(AuthContext);
-    // const token = localStorage.getItem('access-token');
     const [axiosSecure] = useAxiosSecure();
 
-    const { data: selectedClasses = [],  refetch } = useQuery({
-        queryKey: ['selectedclasses', user?.email],
+    const { data: allClasses = [],  refetch } = useQuery({
+        queryKey: ['allClasses', user?.email],
         enabled: !loading,
         queryFn: async () => {
-            const res = await axiosSecure(`/selected-classes?email=${user?.email}`);
+            const res = await axiosSecure(`/users/all-classes?email=${user?.email}`);
             console.log('res from axios', res);
             return res.data;
         }
     })
 
-    return [selectedClasses, refetch]
+    return [allClasses, refetch]
 
 }
 
-export default useSelectedClasses;
+export default useAllClasses_Instructor;

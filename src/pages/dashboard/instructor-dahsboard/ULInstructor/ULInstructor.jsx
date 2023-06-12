@@ -25,7 +25,7 @@ const ULInstructor = () => {
                             </ActiveLink>
                         </li>
                         <li>
-                            <ActiveLink to="/dashboard/enrolled-classes"><button className="flex items-center gap-2 mb-5"><FaHome></FaHome> <p>My Classes</p></button>
+                            <ActiveLink to="/dashboard/my-classes"><button className="flex items-center gap-2 mb-5"><FaHome></FaHome> <p>My Classes</p></button>
                             </ActiveLink>
                         </li>
                     </>

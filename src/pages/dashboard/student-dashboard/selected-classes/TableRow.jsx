@@ -1,13 +1,15 @@
 import React from 'react';
-import { FaMoneyCheckAlt, FaTrash } from 'react-icons/fa';
+import { FaCheck, FaMoneyCheckAlt, FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import useSelectedClasses from '../../../../hooks/useSelectedClasses';
+import { useLocation } from 'react-router-dom';
 
 const TableRow = ({ selectedCls, index }) => {
 
-    const {_id, title, image, schedule, instructor, price} = selectedCls;
-    const [, , refetch] = useSelectedClasses();
-    console.log(refetch)
+    const { _id, title, image, schedule, instructor, price } = selectedCls;
+    const [, refetch] = useSelectedClasses();
+    const location = useLocation();
+    console.log(location.pathname)
 
     const handleDelete = cls => {
 
@@ -29,7 +31,7 @@ const TableRow = ({ selectedCls, index }) => {
                     })
                         .then(res => res.json())
                         .then(data => {
-                            console.log("Nishat data",data);
+                            // console.log("Nishat data",data);
                             if (data.deletedCount > 0) {
                                 refetch();
                                 Swal.fire(
@@ -48,7 +50,7 @@ const TableRow = ({ selectedCls, index }) => {
         <tr>
             <th>
                 <label>
-                    {index+1}
+                    {index + 1}
                 </label>
             </th>
             <td>
@@ -68,9 +70,14 @@ const TableRow = ({ selectedCls, index }) => {
                 {instructor}
             </td>
             <td>{price}</td>
-            <th className='flex flex-col gap-2 justify-center items-start'>
-                <button className="btn btn-ghost btn-outline btn-xs text-green-600"><FaMoneyCheckAlt/> pay</button>
-                <button onClick={() => handleDelete(selectedCls)} className="btn btn-ghost btn-outline btn-xs text-red-700"><FaTrash/> Delete</button>
+            <th>
+                {
+                    location.pathname === '/dashboard/enrolled-classes' ? <button className="btn btn-ghost btn-outline btn-xs text-green-600">Enrolled<FaCheck /></button> :
+                        <div className='flex flex-col gap-2 justify-center items-start'>
+                            <button className="btn btn-ghost btn-outline btn-xs text-green-600"><FaMoneyCheckAlt /> pay</button>
+                            <button onClick={() => handleDelete(selectedCls)} className="btn btn-ghost btn-outline btn-xs text-red-700"><FaTrash /> Delete</button>
+                        </div>
+                }
             </th>
         </tr>
     );

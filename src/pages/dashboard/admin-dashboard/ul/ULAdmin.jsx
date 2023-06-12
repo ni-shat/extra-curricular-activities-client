@@ -2,8 +2,11 @@ import ActiveLink from '../../../../components/ActiveLink';
 import { FaHome, FaTasks, FaUsersCog } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import logo from '../../../../assets/logo-black.svg'
+import { useContext } from 'react';
+import { AuthContext } from '../../../../providers/AuthProvider';
 
 const ULAdmin = () => {
+    const {user} = useContext(AuthContext);
     return (
         <div>
             {/* for admin */}
@@ -35,6 +38,7 @@ const ULAdmin = () => {
                 <li><ActiveLink to="/menu"> <button className="flex items-center gap-2 mb-5"><FaHome></FaHome> <p>User ALl Classes</p></button> </ActiveLink></li>
                 <li><ActiveLink to="/order/salad"><button className="flex items-center gap-2 mb-5"><FaHome></FaHome> <p>Enroll</p></button> </ActiveLink></li>
                 <li><ActiveLink to="/order/salad"><button className="flex items-center gap-2 mb-5"><FaHome></FaHome> <p>About Us</p></button> </ActiveLink></li>
+                <li>{user?.email}</li>
             </ul>
 
         </div>

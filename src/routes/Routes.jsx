@@ -8,13 +8,13 @@ import SignUp from "../pages/signup/SignUp";
 import Error from "../pages/error/Error";
 import Instructors from "../pages/instructors/Instructors";
 import PrivateRoute from "./PrivateRoute";
-import Dashboard from "../layout/Dashoard";
 import UserHome from "../pages/dashboard/user-home/UserHome";
 import SelectedClasses from "../pages/dashboard/student-dashboard/selected-classes/SelectedClasses";
 import EnrolledClasses from "../pages/dashboard/student-dashboard/enrolled-classes/EnrolledClasses";
 import DashBoard from "../layout/DashBoard";
 import AllUsers from "../pages/dashboard/admin-dashboard/all-users/AllUsers";
 import AddClass from "../pages/dashboard/instructor-dahsboard/add-class/AddClass";
+import MyClasses from "../pages/dashboard/instructor-dahsboard/my-classes/MyClasses";
 
 
 export const router = createBrowserRouter([
@@ -43,11 +43,11 @@ export const router = createBrowserRouter([
     {
       path: 'dashboard',
       // element: <Dashboard></Dashboard>, 
-      element: <DashBoard></DashBoard>,
+      element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
       children: [
         {
           path: 'userhome',
-          element: <UserHome></UserHome>
+          element: <PrivateRoute><UserHome></UserHome></PrivateRoute>
         },
         {
           path: 'selected-classes',
@@ -65,28 +65,11 @@ export const router = createBrowserRouter([
           path: 'add-class', 
           element: <AddClass></AddClass>
         },
+        {
+          path: 'my-classes', 
+          element: <MyClasses></MyClasses>
+        },
 
-        // {
-        //   path:'payment',
-        //   element: <Payment></Payment>
-        // },
-        // // admin routes
-        // {
-        //   path: 'adminhome',
-        //   element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
-        // },
-        // {
-        //   path: 'allusers', 
-        //   element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
-        // },
-        // {
-        //   path: 'addItem',
-        //   element: <AdminRoute><AddItem></AddItem></AdminRoute>
-        // },
-        // {
-        //   path: 'manageitems',
-        //   element: <AdminRoute><ManageItems></ManageItems></AdminRoute>
-        // }
       ]
     },
     {

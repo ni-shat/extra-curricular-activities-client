@@ -3,7 +3,7 @@
 const UserHome = () => {
     return (
         <div>
-            <h2>Regular user home</h2>
+            <h2 className="uppercase text-7xl font-extrabold">WElcome</h2>
         </div>
     );
 };

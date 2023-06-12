@@ -34,11 +34,10 @@ const SignUp = () => {
                         const saveUser = {
                             name: data.name,
                             email: data.email,
-                            password: data.password,
-                            photoURL: data.photoURL,
-                            gender: data.gender,
-                            address: data.address,
-                            phone: data.phone,
+                            userImage: data.photoURL,
+                            location: data.address,
+                            role: 'student',
+                            phone: data.phone
                         }
                         fetch('http://localhost:5000/users', {
                             method: 'POST',

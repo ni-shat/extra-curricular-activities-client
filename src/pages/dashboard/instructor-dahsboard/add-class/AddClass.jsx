@@ -6,64 +6,62 @@ import Swal from 'sweetalert2';
 import { AuthContext } from '../../../../providers/AuthProvider';
 import { useForm } from 'react-hook-form';
 
-const AddClass = () => {
 
+const AddClass = () => {
     const { register, handleSubmit, reset, formState: { errors }, watch } = useForm();
     const password = watch('password');
     const confirmPassword = watch('confirmPassword');
-
     const { user, loading, createUser, updateUserProfile } = useContext(AuthContext);
     const navigate = useNavigate();
 
+  
+
     const onSubmit = data => {
+        console.log("add cls", data);
 
-        console.log(data)
-        createUser(data.email, data.password)
-            .then(result => {
+        const clsObj = {
+            title: data.className,
+            instructor: user?.displayName,
+            schedule: "",
+            price: data.price,
+            total_enrolled: 0,
+            status: 'pending',
+            image: data.classImage
+        }
 
-                const loggedUser = result.user;
-                console.log(loggedUser);
+        const saveUser = {
+            name: user?.displayName, role: "instructor", email: user?.email, userImage: user?.photoURL,
+            classes: [
+                clsObj
+            ]
+        }
+        console.log(saveUser)
 
-                updateUserProfile(data.name, data.photoURL)
-                    .then(() => {
-                        const saveUser = {
-                            name: data.name,
-                            email: data.email,
-                            password: data.password,
-                            photoURL: data.photoURL,
-                            gender: data.gender,
-                            address: data.address,
-                            phone: data.phone,
-                        }
-                        fetch('http://localhost:5000/users', {
-                            method: 'POST',
-                            headers: {
-                                'content-type': 'application/json'
-                            },
-                            body: JSON.stringify(saveUser)
-                        })
-                            .then(res => res.json())
-                            .then(data => {
-                                if (data.insertedId) {
-                                    reset();
-                                    Swal.fire({
-                                        position: 'top-end',
-                                        icon: 'success',
-                                        title: 'User created successfully.',
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    });
-                                    navigate('/');
-                                }
-                            })
-
-
-
-                    })
-                    .catch(error => console.log(error))
+        fetch('http://localhost:5000/users/add-a-class', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify([saveUser, clsObj])
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log('data in add class', data)
+                if (data.insertedId || data.modifiedCount) {
+                    reset();
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Class added successfully.',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
             })
-    };
 
+
+
+    };
 
 
 
@@ -73,7 +71,6 @@ const AddClass = () => {
                 <title>Music School | Add a class</title>
             </Helmet>
 
-            <h3 className='font-monoton-lg opacity-10 text-gray-500  whitespace-nowrap text-center -rotate-90 absolute -left-52 top-[42%] '>Signup</h3>
 
             <div className="pt-20 pb-20  bg-white">
                 <div className="flex w-[100%] mx-auto items-center justify-center ">

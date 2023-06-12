@@ -6,7 +6,7 @@ import ggl from '../../../assets/ggl.png'
 
 const GoogleLogin = () => {
 
-    const { googleSignIn } = useContext(AuthContext);
+    const { googleSignIn, user } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -17,8 +17,8 @@ const GoogleLogin = () => {
             .then(result => {
                 const loggedInUser = result.user;
                 console.log(loggedInUser);
-                const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email }
-                fetch('http://localhost:5000/users', {
+                const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, role: "student" }
+                fetch(`http://localhost:5000/users?email=${user?.email}`, {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

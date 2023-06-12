@@ -1,6 +1,7 @@
 import { FaArrowRight } from 'react-icons/fa';
 import teacher from '../../../assets/teacher.png'
 import TeacherSlider from './TeacherSlider';
+import { Link } from 'react-router-dom';
 
 
 
@@ -74,9 +75,9 @@ const OurTeachers = () => {
             <div className='-mt-10 flex items-center justify-between'>
                 <h3 className='font-monoton  opacity-10 text-gray-500  whitespace-nowrap'> <span>Popular </span>  <span>instructor</span> </h3>
                 <div className='mr-20'>
-                    <button className='btn btn-lg bg-transparent border-2  rounded-full text-gray-800 hover:bg-white hover:text-red-600'>
+                    <Link to='/instructors' className='btn btn-lg bg-transparent border-2 px-10 ml-2 rounded-full text-gray-800 hover:bg-white hover:text-red-600'>
                         view more 
-                    </button>
+                    </Link>
                 </div>
             </div>
             <TeacherSlider></TeacherSlider>
