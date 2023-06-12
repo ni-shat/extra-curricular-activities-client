@@ -1,17 +1,17 @@
-import { FaHome, FaUtensils, FaWallet } from "react-icons/fa";
-import { Link, Outlet } from "react-router-dom";
-import ActiveLink from "../components/ActiveLink";
-import logo from '../assets/logo-black.svg'
+import {  Outlet } from "react-router-dom";
 import NavbarDashboard from "../pages/dashboard/navbar/NavbarDashboard";
 import ULStudents from "../pages/dashboard/student-dashboard/ul/ULStudents";
 import ULAdmin from "../pages/dashboard/admin-dashboard/ul/ULAdmin";
 import useAdmin from "../hooks/useAdmin";
+import ULInstructor from "../pages/dashboard/instructor-dahsboard/ULInstructor/ULInstructor";
+import useInstructor from "../hooks/useInstructor";
 
 const DashBoard = () => {
 
     const isStudent = false;
     const [isAdmin] = useAdmin();
-    console.log(isAdmin)
+    const [isInstructor] = useInstructor();
+    console.log(isInstructor)
 
 
     return (
@@ -36,9 +36,9 @@ const DashBoard = () => {
                     {
                         isAdmin && <ULAdmin></ULAdmin>
                     }
-                    {/* {
-                        asAdmin && <ULAdmin></ULAdmin>
-                    } */}
+                    {
+                        isInstructor && <ULInstructor></ULInstructor>
+                    }
 
                 </div>
             </div>
