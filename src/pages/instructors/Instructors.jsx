@@ -61,7 +61,7 @@ const Instructors = () => {
                     pageNumbers.map(numb =>
                         <button
                             onClick={() => setCurrentPage(numb)}
-                            className={`btn btn-xs mx-2 text-white ${currentPage === numb ? "selected" : ""} `}
+                            className={`btn btn-xs mx-2 text-white ${currentPage === numb ? "bg-red-500" : ""} `}
                             key={numb}>
                             {numb+1}
                         </button>

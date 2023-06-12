@@ -7,6 +7,8 @@ import Login from "../pages/login/Login";
 import SignUp from "../pages/signup/SignUp";
 import Error from "../pages/error/Error";
 import Instructors from "../pages/instructors/Instructors";
+import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../layout/Dashoard";
 
 
 export const router = createBrowserRouter([
@@ -20,7 +22,7 @@ export const router = createBrowserRouter([
         },  
         {
           path: 'login',
-          element: <Login></Login>
+          element: <PrivateRoute><Login></Login></PrivateRoute>
         },
         {
           path: 'signup',
@@ -30,6 +32,41 @@ export const router = createBrowserRouter([
           path: 'instructors',
           element: <Instructors></Instructors>
         },    
+      ]
+    },
+    {
+      path: 'dashboard',
+      element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>, 
+      children: [
+        {
+          path: 'userhome',
+          element: <UserHome></UserHome>
+        },
+        {
+          path: 'mycart', 
+          element: <MyCart></MyCart>
+        },
+        {
+          path:'payment',
+          element: <Payment></Payment>
+        },
+        // admin routes
+        {
+          path: 'adminhome',
+          element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
+        },
+        {
+          path: 'allusers', 
+          element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+        },
+        {
+          path: 'addItem',
+          element: <AdminRoute><AddItem></AddItem></AdminRoute>
+        },
+        {
+          path: 'manageitems',
+          element: <AdminRoute><ManageItems></ManageItems></AdminRoute>
+        }
       ]
     },
     {
