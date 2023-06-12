@@ -32,7 +32,7 @@ const Navbar = () => {
                         {navitems}
                     </ul>
                 </div>
-                <Link to='/'><img className='w-[18%]' src={logo} alt="" /></Link>
+                <Link className='w-[13.5%]' to='/'><img className='w-full' src={logo} alt="" /></Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">

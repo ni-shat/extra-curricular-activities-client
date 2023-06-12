@@ -1,9 +1,13 @@
 import React from 'react';
+import useEnrolledClasses from '../../../../hooks/useEnrolledClasses';
 
 const EnrolledClasses = () => {
+
+    const [enrollClasses] = useEnrolledClasses();
+
     return (
         <div>
-            h
+            {enrollClasses.length}
         </div>
     );
 };
