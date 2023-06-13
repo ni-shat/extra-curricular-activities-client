@@ -5,19 +5,20 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../../../providers/AuthProvider';
 import { useForm } from 'react-hook-form';
+import isValidImageURL from '../../../../hooks/useValidImage';
 
 
 const AddClass = () => {
     const { register, handleSubmit, reset, formState: { errors }, watch } = useForm();
     const password = watch('password');
     const confirmPassword = watch('confirmPassword');
-    const { user, loading, createUser, updateUserProfile } = useContext(AuthContext);
-    const navigate = useNavigate();
+    const { user } = useContext(AuthContext);
 
   
 
     const onSubmit = data => {
         console.log("add cls", data);
+        
 
         const saveClass = {
             instructor: user?.displayName,  

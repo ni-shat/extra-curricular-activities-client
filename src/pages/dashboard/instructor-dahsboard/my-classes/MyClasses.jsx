@@ -10,22 +10,23 @@ import Swal from 'sweetalert2';
 
 const MyClasses = () => {
 
-    const [allClasses, refetch] = useAllClasses_Instructor(); 
+    const [allClasses, refetch] = useAllClasses_Instructor();
+    console.log("allClasses in where im troubling", allClasses) 
     
     const [axiosSecure] = useAxiosSecure();
 
-    const handleDelete = async (index) => {
+    const handleDelete = async (id) => {
         console.log("Hit delet btn")
         // const response = UseHandleDelete(`/users/all-classes/${allClasses._id}?email=${user?.email}`);
         // if(response) {
         //     refetch();
         // }
-        const url = `/users/all-classes/${allClasses._id}?classId=${index}`;
+        
         try {
             console.log('im in try hook dlt')
-            const response = await axiosSecure.delete(url);
+            const response = await axiosSecure.delete(`/all-classes/${id}`);
     
-            console.log(response.data);
+            console.log("data in delete hookkkk",response.data);
            
             Swal.fire(
                 'Deleted!',
@@ -35,7 +36,7 @@ const MyClasses = () => {
             refetch();
             return response.data;
         } catch (error) {
-            console.error('error in hook',error);
+            console.error('error in deleteeeeeee hook',error);
         }
     }
 
@@ -46,8 +47,7 @@ const MyClasses = () => {
                     {/* head */}
                     <thead className='z-10'>
                         <tr className='bg-slate-100 '>
-                            <th className='text-gray-800 font-roboto-bold text-base'>
-                                
+                            <th className='text-gray-800 font-roboto-bold text-base w-2'>
                             </th>
                             <th className='text-gray-800 font-roboto-bold text-base'>Classes</th>
                             <th className='text-gray-800 font-roboto-bold text-base'>Total Enrolled</th>
