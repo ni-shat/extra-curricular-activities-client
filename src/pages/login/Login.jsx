@@ -7,7 +7,9 @@ import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
-import Footer from '../shared/footer/Footer';
+import useAdmin from '../../hooks/useAdmin';
+import useInstructor from '../../hooks/useInstructor';
+import useStudent from '../../hooks/useStudent';
 
 const Login = () => {
 
@@ -15,7 +17,9 @@ const Login = () => {
     const { signIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
+
+    const from = location.state?.from?.pathname  || "/";
+
 
     const onSubmit = data => {
 
@@ -83,7 +87,7 @@ const Login = () => {
                                 </div>
                             </form>
                             <div className='-mt-8'>
-                            <GoogleLogin></GoogleLogin>
+                                <GoogleLogin></GoogleLogin>
                             </div>
                         </div>
                     </div>

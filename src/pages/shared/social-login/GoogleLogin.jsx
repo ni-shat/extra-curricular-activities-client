@@ -9,6 +9,7 @@ const GoogleLogin = () => {
     const { googleSignIn, user } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
+    console.log(location.state?.from?.pathname)
 
     const from = location.state?.from?.pathname || "/";
 

@@ -7,6 +7,7 @@ import { PropagateLoader } from "react-spinners";
 const PrivateRoute = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
     const location = useLocation();
+    // console.log()
 
     if(loading){
         console.log('hi')

@@ -41,7 +41,7 @@ const MyClasses = () => {
     }
 
     return (
-           <div className='w-full pl-16 pr-20 pt-32 relative  overflow-clip'>
+           <div className='w-full pl-16 pr-20 mt-32 relative  overflow-clip'>
             <div className=" ">
                 <table className="table table-pin-rows">
                     {/* head */}

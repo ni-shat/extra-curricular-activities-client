@@ -16,6 +16,7 @@ import AllUsers from "../pages/dashboard/admin-dashboard/all-users/AllUsers";
 import AddClass from "../pages/dashboard/instructor-dahsboard/add-class/AddClass";
 import MyClasses from "../pages/dashboard/instructor-dahsboard/my-classes/MyClasses";
 import AllApprovedClasses from "../pages/AllClasses/AllApprovedClasses";
+import DashboardPrivateRoute from "./DashboardPrivateRoute";
 
 
 export const router = createBrowserRouter([
@@ -48,7 +49,6 @@ export const router = createBrowserRouter([
     },
     {
       path: 'dashboard',
-      // element: <Dashboard></Dashboard>, 
       element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
       children: [
         {
@@ -57,23 +57,27 @@ export const router = createBrowserRouter([
         },
         {
           path: 'selected-classes',
-          element: <SelectedClasses></SelectedClasses>
+          element: <DashboardPrivateRoute><SelectedClasses></SelectedClasses></DashboardPrivateRoute>
         },
         {
           path: 'enrolled-classes',
-          element: <EnrolledClasses></EnrolledClasses>
+          element: <DashboardPrivateRoute><EnrolledClasses></EnrolledClasses></DashboardPrivateRoute>
         },
         {
           path: 'manage-users', 
-          element: <AllUsers></AllUsers>
+          element: <DashboardPrivateRoute><AllUsers></AllUsers></DashboardPrivateRoute>
+        },
+        {
+          path: 'manage-classes', 
+          element: <DashboardPrivateRoute><AllUsers></AllUsers></DashboardPrivateRoute>
         },
         {
           path: 'add-class', 
-          element: <AddClass></AddClass>
+          element: <DashboardPrivateRoute><AddClass></AddClass></DashboardPrivateRoute>
         },
         {
           path: 'my-classes', 
-          element: <MyClasses></MyClasses>
+          element: <DashboardPrivateRoute><MyClasses></MyClasses></DashboardPrivateRoute>
         },
 
       ]
