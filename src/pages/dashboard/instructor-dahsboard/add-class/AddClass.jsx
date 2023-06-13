@@ -6,58 +6,67 @@ import Swal from 'sweetalert2';
 import { AuthContext } from '../../../../providers/AuthProvider';
 import { useForm } from 'react-hook-form';
 import isValidImageURL from '../../../../hooks/useValidImage';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 
+const img_hosting_token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN;
+//https://api.imgbb.com/1/upload?expiration=600&key=YOUR_CLIENT_API_KEY
 
 const AddClass = () => {
+    const [axiosSecure] = useAxiosSecure();
     const { register, handleSubmit, reset, formState: { errors }, watch } = useForm();
     const password = watch('password');
     const confirmPassword = watch('confirmPassword');
     const { user } = useContext(AuthContext);
 
-  
+    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
 
     const onSubmit = data => {
         console.log("add cls", data);
-        
-
-        const saveClass = {
-            instructor: user?.displayName,  
-            email: user?.email, 
-            instructorImage: user?.photoURL,
-            availableSeats: data.availableSeats ,
-            classImage: data.classImage,
-            classTitle: data.className,
-            price: data.price,
-            total_enrolled: 0,
-            status: 'pending',
-            feedback: ''
-        }
-        console.log(saveClass)
-
-        fetch(`http://localhost:5000/add-a-class`, {
+        const formData = new FormData();
+        formData.append('image', data.classImage[0]);
+       
+        fetch(img_hosting_url, {
             method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(saveClass)
+            body: formData
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log('data in add class', data)
-                if (data.insertedId || data.modifiedCount) {
-                    reset();
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Class added successfully.',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+        .then(res => res.json())
+        .then(imgResponse => {
+            console.log(imgResponse);
+            if(imgResponse.success){
+                const imgURL = imgResponse.data.display_url;
+                console.log(imgURL);
+                const saveClass = {
+                    instructor: user?.displayName,  
+                    email: user?.email, 
+                    instructorImage: user?.photoURL,
+                    availableSeats: data.availableSeats ,
+                    classImage: imgURL,
+                    classTitle: data.className,
+                    price: parseFloat(data.price),
+                    total_enrolled: 0,
+                    status: 'pending',
+                    feedback: ''
                 }
-            })
+                console.log(saveClass)
+                axiosSecure.post('/add-a-class', saveClass)
+
+                .then(data => {
+                    console.log('after posting new menu item', data.data)
+                    if(data.data.insertedId){
+                        reset();
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Item added successfully',
+                            showConfirmButton: false,
+                            timer: 1500
+                          })
+                    }
+                })
 
 
-
+            }
+        })
     };
 
 
@@ -86,7 +95,9 @@ const AddClass = () => {
                                         <label className="label">
                                             <span className="text-gray-800">Class Image</span>
                                         </label>
-                                        <input type="text"  {...register("classImage", { required: true })} className="input input-bordered border-gray-700 border shadow-sm" />
+                                        {/* <input type="text"  {...register("classImage", { required: true })} className="input input-bordered border-gray-700 border shadow-sm" /> */}
+                                        
+                                        <input type="file" {...register("classImage", { required: true })} className="file-input file-input-bordered file-input-secondary w-full max-w-xs" />
                                         {errors.classImage && <span className="text-red-600">This field is required</span>}
                                     </div>
                                 </div>

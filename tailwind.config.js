@@ -14,6 +14,7 @@ export default {
         mytheme: {
           "primary":  "#DC2626",
           // "neutral": "#ffffff",
+          "secondary": "#4b5563",
         },
       },
     ],
