@@ -3,6 +3,7 @@ import { FaCheckCircle, FaTrashAlt, FaUserShield } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import UseHandleDelete from "../../../../hooks/useHandleDelete";
 
 
 const AllUsers = () => {
@@ -53,18 +54,24 @@ const AllUsers = () => {
     }
 
     const handleDelete = async (user) => {
-        try {
-            const response = await axiosSecure.delete(`/users/${user._id}`);
-            console.log(response.data);
+
+        const response = UseHandleDelete(`/users/${user._id}`);
+        if(response){
             refetch();
-            Swal.fire(
-                'Deleted!',
-                'Your file has been deleted.',
-                'success'
-            )
-        } catch (error) {
-            console.error(error);
         }
+
+        // try {
+        //     const response = await axiosSecure.delete(`/users/${user._id}`);
+        //     console.log(response.data);
+        //     refetch();
+        //     Swal.fire(
+        //         'Deleted!',
+        //         'Your file has been deleted.',
+        //         'success'
+        //     )
+        // } catch (error) {
+        //     console.error(error);
+        // }
     }
 
     return (
@@ -72,11 +79,11 @@ const AllUsers = () => {
             <Helmet>
                 <title>Music School | All users</title>
             </Helmet>
-            <div className="overflow-x-auto">
-                <table className="table">
+            <div className="overflow-scroll h-screen mt-32">
+                <table className="table table-pin-rows   ">
                     {/* head */}
                     <thead>
-                        <tr>
+                        <tr className="bg-slate-100 z-10">
                             <th className="text-gray-800 font-roboto-bold text-base"></th>
                             <th className="text-gray-800 font-roboto-bold text-base">Name</th>
                             <th className="text-gray-800 font-roboto-bold text-base">Email</th>
@@ -84,7 +91,7 @@ const AllUsers = () => {
                             <th className="text-gray-800 font-roboto-bold text-base">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="overflow-scroll">
                         {
                             users.map((user, index) => <tr key={user._id}>
                                 <th>{index + 1}</th>

@@ -15,6 +15,7 @@ import DashBoard from "../layout/DashBoard";
 import AllUsers from "../pages/dashboard/admin-dashboard/all-users/AllUsers";
 import AddClass from "../pages/dashboard/instructor-dahsboard/add-class/AddClass";
 import MyClasses from "../pages/dashboard/instructor-dahsboard/my-classes/MyClasses";
+import AllApprovedClasses from "../pages/AllClasses/AllApprovedClasses";
 
 
 export const router = createBrowserRouter([
@@ -37,6 +38,11 @@ export const router = createBrowserRouter([
         {
           path: 'instructors',
           element: <Instructors></Instructors>
+        },    
+        {
+          path: 'all-approved-classes',
+          element: <AllApprovedClasses></AllApprovedClasses>,
+          loader: () => fetch('/users/all-approved-classes')
         },    
       ]
     },

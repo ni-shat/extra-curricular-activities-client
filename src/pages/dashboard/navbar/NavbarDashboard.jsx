@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../../providers/AuthProvider';
 import { FaUserCircle } from 'react-icons/fa';
+import NavActiveLink from '../../../components/NavActiveLink';
 
 const NavbarDashboard = () => {
 
@@ -16,10 +17,10 @@ const NavbarDashboard = () => {
 
     const navitems = 
     <>
-        <li className='text-base'><ActiveLink to='/'>Home</ActiveLink></li>
-        <li className='text-base'><ActiveLink to='/'>Classes</ActiveLink></li>
-        <li className='text-base'><ActiveLink to='/instructors'>Instructors</ActiveLink></li>
-        <li className='text-base'><ActiveLink to='/dashboard/userhome'>Dashboard</ActiveLink></li>
+        <li><NavActiveLink to='/'>Home</NavActiveLink></li>
+        <li><NavActiveLink to='/all-approved-classes'>Classes</NavActiveLink></li>
+        <li><NavActiveLink to='/instructors'>Instructors</NavActiveLink></li>
+        <li><NavActiveLink to='/dashboard/userhome'>Dashboard</NavActiveLink></li>
     </>
 
 
@@ -70,10 +71,10 @@ const NavbarDashboard = () => {
                     <span className='hidden w-px h-6 bg-gray-300 md:block'></span>
                     <div className='space-y-3 items-center gap-x-6 md:flex md:space-y-0'>
                         {
-                            user ? <button onClick={handleLogOut} className='btn px-10 bg-[#C20909] text-white border-0  
+                            user ? <button onClick={handleLogOut} className='px-8 py-3 bg-[#C20909] text-white border-0  
                              hover:bg-opacity-50 font-bold rounded-full'>Log out</button>
                                 :
-                                <Link to='/login'><button className='btn px-10 bg-[#C20909] text-white border-0  
+                                <Link to='/login'><button className='px-8 py-3 bg-[#C20909] text-white border-0  
                                  hover:bg-opacity-50 font-bold rounded-full'>Login</button></Link>
                         }
                     </div>

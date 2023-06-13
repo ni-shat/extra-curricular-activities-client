@@ -70,7 +70,7 @@ const SignUp = () => {
 
 
     return (
-        <div className='bg-[../../assets/bg-signup.svg] bg-cover bg-center h-screen'>
+        <div className='bg-[../../assets/bg-signup.svg] bg-cover bg-center'>
              <Helmet>
                 <title>Music School | Signup</title>
             </Helmet>
@@ -78,7 +78,7 @@ const SignUp = () => {
             <h3 className='font-monoton-lg opacity-10 text-gray-500  whitespace-nowrap text-center -rotate-90 absolute -left-52 top-[42%] '>Signup</h3>
 
             <Navbar></Navbar>
-            <div className="pt-14 pb-20  bg-white">
+            <div className="pt-32 pb-0 bg-white">
                 <div className="flex w-[80%] mx-auto items-center justify-center ">
                     <div className='w-[65%]'>
                         <div className="card w-full pb-10  flex-shrink-0 shadow-2xl bg-base-100  ">
@@ -178,7 +178,6 @@ const SignUp = () => {
 
                 </div>
             </div>
-            <Footer></Footer>
         </div>
     );
 };

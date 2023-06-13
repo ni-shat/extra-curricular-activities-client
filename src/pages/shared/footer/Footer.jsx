@@ -4,7 +4,7 @@ import logo from '../../../assets/logo2x.png'
 const Footer = () => {
     return (
         <>
-            <div className="footer font-roboto flex gap-24 py-24 px-40 bg-[#1B1B1B] text-white">
+            <div className="footer font-roboto flex gap-24 py-24 px-40 bg-[#1B1B1B] text-white mt-24">
                 <div className='w-1/4 space-y-3'>
                     <img className='w-[35%] -mt-2' src={logo} alt="" />
                     <p className='leading-7'>Welcome to SongBook, where studying music and sharing our knowledge comes foremost.</p>

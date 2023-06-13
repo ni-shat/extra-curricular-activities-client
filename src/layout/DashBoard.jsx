@@ -6,6 +6,7 @@ import useAdmin from "../hooks/useAdmin";
 import ULInstructor from "../pages/dashboard/instructor-dahsboard/ULInstructor/ULInstructor";
 import useInstructor from "../hooks/useInstructor";
 import useStudent from "../hooks/useStudent";
+import Footer from "../pages/shared/footer/Footer";
 
 const DashBoard = () => {
 
@@ -17,20 +18,20 @@ const DashBoard = () => {
 
 
     return (
-        <div>
+        <div className="bg-white">
             <div className="drawer lg:drawer-open bg-white relative">
                 <div className="absolute left-0 w-full">
                     <NavbarDashboard></NavbarDashboard>
                 </div>
 
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content h-screen overflow-clip flex flex-col items-center justify-center">
+                <div className="drawer-content overflow-clip">
                     {/* Page content here */}
                     <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
                     <Outlet></Outlet>
 
                 </div>
-                <div className="h-screen bg-[#E6E6E6] border border-l-0 font-bold shadow-xl pt-10">
+                <div className=" bg-[#E6E6E6] h-screen  border border-l-0 font-bold shadow-xl pt-10">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
 
                     {
@@ -46,6 +47,7 @@ const DashBoard = () => {
 
                 </div>
             </div>
+            <Footer></Footer>
         </div>
 
     );

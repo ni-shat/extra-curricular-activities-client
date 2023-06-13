@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Navigate, useLocation } from "react-router";
 import { AuthContext } from "../providers/AuthProvider";
+import { PropagateLoader } from "react-spinners";
 
 
 const PrivateRoute = ({ children }) => {
@@ -9,7 +10,7 @@ const PrivateRoute = ({ children }) => {
 
     if(loading){
         console.log('hi')
-        return <progress className="progress w-56"></progress>
+        return <PropagateLoader color="#DC2828" />
     }
 
     if (user) {

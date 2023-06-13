@@ -5,22 +5,47 @@ import { useContext } from 'react';
 import { AuthContext } from '../../../../providers/AuthProvider';
 import useAllClasses_Instructor from '../../../../hooks/useAllClasses';
 import MyClass from './MyClass';
+import UseHandleDelete from '../../../../hooks/useHandleDelete';
+import Swal from 'sweetalert2';
 
 const MyClasses = () => {
 
-    const [allClasses] = useAllClasses_Instructor();
-    console.log("allClasses",allClasses)
+    const [allClasses, refetch] = useAllClasses_Instructor(); 
+    
+    const [axiosSecure] = useAxiosSecure();
 
-
+    const handleDelete = async (index) => {
+        console.log("Hit delet btn")
+        // const response = UseHandleDelete(`/users/all-classes/${allClasses._id}?email=${user?.email}`);
+        // if(response) {
+        //     refetch();
+        // }
+        const url = `/users/all-classes/${allClasses._id}?classId=${index}`;
+        try {
+            console.log('im in try hook dlt')
+            const response = await axiosSecure.delete(url);
+    
+            console.log(response.data);
+           
+            Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+            )
+            refetch();
+            return response.data;
+        } catch (error) {
+            console.error('error in hook',error);
+        }
+    }
 
     return (
-        // <div>
-           <div className='w-full pl-16 pr-20'>
-            <div className="overflow-x-auto ">
-                <table className="table table-pin-rows table-pin-cols">
+           <div className='w-full pl-16 pr-20 pt-32 relative  overflow-clip'>
+            <div className=" ">
+                <table className="table table-pin-rows">
                     {/* head */}
-                    <thead>
-                        <tr>
+                    <thead className='z-10'>
+                        <tr className='bg-slate-100 '>
                             <th className='text-gray-800 font-roboto-bold text-base'>
                                 
                             </th>
@@ -29,15 +54,18 @@ const MyClasses = () => {
                             <th className='text-gray-800 font-roboto-bold text-base'></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='overflow-scroll'>
                         {
-                            allClasses[0]?.classes?.map((cls, index) => <MyClass key={cls._id} cls={cls} index={index}></MyClass>)
+                            allClasses?.map((cls, index) => <MyClass key={cls._id} 
+                            cls={cls} 
+                            index={index} 
+                            handleDelete={handleDelete}
+                            ></MyClass>)
                         }
                     </tbody>
                 </table>
             </div>
         </div>
-        // </div>
     );
 };
 

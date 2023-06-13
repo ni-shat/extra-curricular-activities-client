@@ -78,18 +78,18 @@ const Login = () => {
                                 <div className="form-control mt-6">
                                     <button className="btn btn-primary text-white">Login</button>
                                 </div>
-                                <GoogleLogin></GoogleLogin>
                                 <div className='flex mt-10 justify-center'>
                                     <Link to='/signup'>Don't Have an account? <span className='text-red-600 font-bold'>Sign up</span></Link>
                                 </div>
-
                             </form>
+                            <div className='-mt-8'>
+                            <GoogleLogin></GoogleLogin>
+                            </div>
                         </div>
                     </div>
 
                 </div>
             </div>
-            <Footer></Footer>
         </div>
     );
 };

@@ -19,30 +19,26 @@ const AddClass = () => {
     const onSubmit = data => {
         console.log("add cls", data);
 
-        const clsObj = {
-            title: data.className,
-            instructor: user?.displayName,
-            schedule: "",
+        const saveClass = {
+            instructor: user?.displayName,  
+            email: user?.email, 
+            instructorImage: user?.photoURL,
+            availableSeats: data.availableSeats ,
+            classImage: data.classImage,
+            classTitle: data.className,
             price: data.price,
             total_enrolled: 0,
             status: 'pending',
-            image: data.classImage
+            feedback: ''
         }
+        console.log(saveClass)
 
-        const saveUser = {
-            name: user?.displayName, role: "instructor", email: user?.email, userImage: user?.photoURL,
-            classes: [
-                clsObj
-            ]
-        }
-        console.log(saveUser)
-
-        fetch('http://localhost:5000/users/add-a-class', {
+        fetch(`http://localhost:5000/add-a-class`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify([saveUser, clsObj])
+            body: JSON.stringify(saveClass)
         })
             .then(res => res.json())
             .then(data => {
@@ -73,7 +69,7 @@ const AddClass = () => {
 
 
             <div className="pt-20 pb-20  bg-white">
-                <div className="flex w-[100%] mx-auto items-center justify-center ">
+                <div className="flex w-[100%] mx-auto mt-10 items-center justify-center ">
                     <div className='w-[65%]'>
                         <div className="card w-full pb-10  flex-shrink-0 shadow-2xl bg-base-100  ">
                             <form onSubmit={handleSubmit(onSubmit)} className="card-body py-10 space-y-1">

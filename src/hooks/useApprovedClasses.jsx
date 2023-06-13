@@ -3,23 +3,23 @@ import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import useAxiosSecure from "./useAxiosSecure";
 
-const useAllClasses_Instructor = () => {
+const useAllClasses = () => {
 
     const { user, loading } = useContext(AuthContext);
     const [axiosSecure] = useAxiosSecure();
 
-    const { data: allClasses = [],  refetch } = useQuery({
-        queryKey: ['allClasses', user?.email],
+    const { data: all_Classes = [],  refetch } = useQuery({
+        queryKey: ['all_Classes'],
         enabled: !loading,
         queryFn: async () => {
-            const res = await axiosSecure(`/all-classes?email=${user?.email}`);
+            const res = await axiosSecure('/users/all-approved-classes');
             console.log('res from axios', res);
             return res.data;
         }
     })
 
-    return [allClasses, refetch]
+    return [all_Classes, refetch]
 
 }
 
-export default useAllClasses_Instructor;
+export default useAllClasses;

@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../../providers/AuthProvider';
 import { FaUserCircle } from 'react-icons/fa';
+import ActiveLinkHome from '../../../components/ActiveLinkHome';
 
 const Navbar = () => {
     const location = useLocation();
@@ -19,10 +20,10 @@ const Navbar = () => {
 
     const navitems =
         <>
-            <li className='text-base'><Link to='/'>Home</Link></li>
-            <li className='text-base'><Link to='/'>Classes</Link></li>
-            <li className='text-base'><Link to='/instructors'>Instructors</Link></li>
-            <li className='text-base'><Link to='/dashboard/userhome'>Dashboard</Link></li>
+            <li className=''><ActiveLinkHome to='/'>Home</ActiveLinkHome></li>
+            <li className=''><ActiveLinkHome to='/all-approved-classes'>Classes</ActiveLinkHome></li>
+            <li className=''><ActiveLinkHome to='/instructors'>Instructors</ActiveLinkHome></li>
+            <li className=''><ActiveLinkHome to='/dashboard/userhome'>Dashboard</ActiveLinkHome></li>
         </>
 
 
@@ -76,10 +77,10 @@ const Navbar = () => {
                     <span className='hidden w-px h-6 bg-gray-300 md:block'></span>
                     <div className='space-y-3 items-center gap-x-6 md:flex md:space-y-0'>
                         {
-                            user ? <button onClick={handleLogOut} className='btn px-10 bg-[#C20909] text-white border-0  
+                            user ? <button onClick={handleLogOut} className='px-8 py-3 bg-[#C20909] text-white border-0  
                             hover:bg-gray-50 hover:bg-opacity-20 font-bold rounded-full'>Log out</button>
                                 :
-                                <Link to='/login'><button className='btn px-10 bg-[#C20909] text-white border-0  
+                                <Link to='/login'><button className='px-8 py-3 bg-[#C20909] text-white border-0  
                                 hover:bg-gray-50 hover:bg-opacity-20 font-bold rounded-full'>Login</button></Link>
                         }
                     </div>

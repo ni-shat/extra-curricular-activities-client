@@ -1,10 +1,10 @@
 import React from 'react';
-import { FaMoneyCheckAlt } from 'react-icons/fa';
+import { FaTrashAlt } from 'react-icons/fa';
 
-const MyClass = ({ cls, index }) => {
+const MyClass = ({ cls, index, handleDelete }) => {
 
-    const { title, schedule, total_enrolled, image, status, feedback } = cls;
-    
+    const { _id, instructor, email, instructorImage, availableSeats, classImage, classTitle, price, total_enrolled, status, feedback } = cls;
+   
 
     return (
         <tr>
@@ -17,12 +17,12 @@ const MyClass = ({ cls, index }) => {
                 <div className="flex items-center space-x-3">
                     <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
-                            <img src={image} />
+                            <img src={classImage} />
                         </div>
                     </div>
                     <div>
-                        <div className="font-bold text-base">{title}</div>
-                        <div className="text-sm opacity-50">{schedule}</div>
+                        <div className="font-bold text-base">{classTitle}</div>
+                        {/* <div className="text-sm opacity-50">{schedule}</div> */}
                         {
                             status==='denied' && <p className='text-black font-bold text-sm w-fit border shadow-sm px-1 py-0.5 mt-2 bg-yellow-300  rounded-md'>Feedback: <span className='text-black bg-white'>{feedback}</span> </p>
                         }
@@ -30,10 +30,12 @@ const MyClass = ({ cls, index }) => {
                 </div>
             </td>
             <td className='font-bold text-xl '>
-                {total_enrolled}
+                {
+                    status === 'approved' ? {total_enrolled} : ""
+                }
             </td>
-            <th className='flex justify-center items-center'>
-                <div>
+            <th className='flex items-center w-20 gap-6'>
+                <div className='flex-grow'>
                 {
                     status === 'pending' && <button className="btn btn-outline btn-xs mt-6  text-blue-700">pending</button>
                 }
@@ -44,6 +46,7 @@ const MyClass = ({ cls, index }) => {
                     status === 'approved' && <button className="btn btn-outline btn-xs mt-6 text-green-700">approved</button>
                 }
                 </div>
+                <button onClick={() => handleDelete(index)} className='mt-6 text-red-700 text-base'><FaTrashAlt/></button>
 
             </th>
         </tr>

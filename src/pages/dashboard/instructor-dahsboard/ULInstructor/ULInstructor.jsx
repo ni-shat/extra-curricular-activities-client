@@ -6,7 +6,7 @@ import logo from '../../../../assets/logo-black.svg'
 
 const ULInstructor = () => {
     return (
-        <div>
+        <div className=''>
             <ul className=" px-8  -mt-8  w-80 h-full">
                 {
                     <>

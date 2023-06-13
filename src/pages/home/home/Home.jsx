@@ -20,11 +20,6 @@ const Home = () => {
             </div>
             <Services></Services>
             <OurTeachers></OurTeachers>
-
-             {/* TODO rmove the div*/}
-             <div className='mt-40 text-white'>
-                something
-            </div>
         </div>
     );
 };
