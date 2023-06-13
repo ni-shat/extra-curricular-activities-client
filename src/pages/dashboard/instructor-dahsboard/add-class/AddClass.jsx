@@ -9,7 +9,6 @@ import isValidImageURL from '../../../../hooks/useValidImage';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 
 const img_hosting_token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN;
-//https://api.imgbb.com/1/upload?expiration=600&key=YOUR_CLIENT_API_KEY
 
 const AddClass = () => {
     const [axiosSecure] = useAxiosSecure();
@@ -24,6 +23,8 @@ const AddClass = () => {
         console.log("add cls", data);
         const formData = new FormData();
         formData.append('image', data.classImage[0]);
+
+
        
         fetch(img_hosting_url, {
             method: 'POST',
@@ -32,6 +33,7 @@ const AddClass = () => {
         .then(res => res.json())
         .then(imgResponse => {
             console.log(imgResponse);
+
             if(imgResponse.success){
                 const imgURL = imgResponse.data.display_url;
                 console.log(imgURL);
@@ -48,8 +50,9 @@ const AddClass = () => {
                     feedback: ''
                 }
                 console.log(saveClass)
-                axiosSecure.post('/add-a-class', saveClass)
 
+
+                axiosSecure.post('/add-a-class', saveClass)
                 .then(data => {
                     console.log('after posting new menu item', data.data)
                     if(data.data.insertedId){
@@ -67,6 +70,10 @@ const AddClass = () => {
 
             }
         })
+
+
+
+        
     };
 
 
@@ -95,8 +102,6 @@ const AddClass = () => {
                                         <label className="label">
                                             <span className="text-gray-800">Class Image</span>
                                         </label>
-                                        {/* <input type="text"  {...register("classImage", { required: true })} className="input input-bordered border-gray-700 border shadow-sm" /> */}
-                                        
                                         <input type="file" {...register("classImage", { required: true })} className="file-input file-input-bordered file-input-secondary w-full max-w-xs" />
                                         {errors.classImage && <span className="text-red-600">This field is required</span>}
                                     </div>

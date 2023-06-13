@@ -9,7 +9,6 @@ const GoogleLogin = () => {
     const { googleSignIn, user } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location.state?.from?.pathname)
 
     const from = location.state?.from?.pathname || "/";
 
@@ -19,6 +18,7 @@ const GoogleLogin = () => {
                 const loggedInUser = result.user;
                 console.log(loggedInUser);
                 const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, role: "student" }
+
                 fetch(`http://localhost:5000/users?email=${user?.email}`, {
                     method: 'POST',
                     headers: {

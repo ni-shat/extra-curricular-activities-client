@@ -17,6 +17,7 @@ import AddClass from "../pages/dashboard/instructor-dahsboard/add-class/AddClass
 import MyClasses from "../pages/dashboard/instructor-dahsboard/my-classes/MyClasses";
 import AllApprovedClasses from "../pages/AllClasses/AllApprovedClasses";
 import DashboardPrivateRoute from "./DashboardPrivateRoute";
+import ManageClasses from "../pages/dashboard/admin-dashboard/manage-classes/ManageClasses";
 
 
 export const router = createBrowserRouter([
@@ -69,7 +70,7 @@ export const router = createBrowserRouter([
         },
         {
           path: 'manage-classes', 
-          element: <DashboardPrivateRoute><AllUsers></AllUsers></DashboardPrivateRoute>
+          element: <DashboardPrivateRoute><ManageClasses></ManageClasses></DashboardPrivateRoute>
         },
         {
           path: 'add-class', 

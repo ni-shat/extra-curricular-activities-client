@@ -9,63 +9,102 @@ import GoogleLogin from '../shared/social-login/GoogleLogin';
 import { Helmet } from 'react-helmet';
 import Footer from '../shared/footer/Footer';
 
+const img_hosting_token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN;
+
 
 const SignUp = () => {
-
-
     const { register, handleSubmit, reset, formState: { errors }, watch } = useForm();
     const password = watch('password');
     const confirmPassword = watch('confirmPassword');
 
-    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const { createUser, updateUserProfile, user } = useContext(AuthContext);
     const navigate = useNavigate();
+    const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
 
     const onSubmit = data => {
 
         console.log(data)
-        createUser(data.email, data.password)
-            .then(result => {
-
-                const loggedUser = result.user;
-                console.log(loggedUser);
-
-                updateUserProfile(data.name, data.photoURL)
-                    .then(() => {
-                        const saveUser = {
-                            name: data.name,
-                            email: data.email,
-                            userImage: data.photoURL,
-                            location: data.address,
-                            role: 'student',
-                            phone: data.phone
-                        }
-                        fetch('http://localhost:5000/users', {
-                            method: 'POST',
-                            headers: {
-                                'content-type': 'application/json'
-                            },
-                            body: JSON.stringify(saveUser)
+    
+        const formData = new FormData();
+        formData.append('image', data.photoURL[0]);
+    
+        fetch(img_hosting_url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgResponse => {
+                console.log(imgResponse);
+    
+                if (imgResponse.success) {
+                    const imgURL = imgResponse.data.display_url;
+                    console.log(imgURL);
+    
+                    // const saveUser = {
+                    //     name: data.name,
+                    //     email: data.email,
+                    //     userImage: imgURL,
+                    //     location: data.address,
+                    //     role: 'student',
+                    //     phone: data.phone
+                    // }
+                    // console.log(saveUser)
+    
+    
+                    // write fecth after that
+                    // create user using firebase
+                    createUser(data.email, data.password)
+                        .then(result => {
+                            const loggedUser = result.user;
+                            console.log(loggedUser);
+    
+                            updateUserProfile(data.name, imgURL) // update user profile
+                                .then(() => {
+                                    const saveUser = {
+                                        name: data.name,
+                                        email: data.email,
+                                        userImage: imgURL,
+                                        location: data.address,
+                                        role: 'student',
+                                        phone: data.phone
+                                    }
+                                    // after successfully updating start axios fetch
+                                    fetch(`http://localhost:5000/users?email=${user?.email}`, {
+                                        method: 'POST',
+                                        headers: {
+                                            'content-type': 'application/json'
+                                        },
+                                        body: JSON.stringify(saveUser)
+                                    })
+                                        .then(res => res.json())
+                                        .then(data => {
+                                            if (data.insertedId) {
+                                                reset();
+                                                Swal.fire({
+                                                    position: 'top-end',
+                                                    icon: 'success',
+                                                    title: 'User created successfully.',
+                                                    showConfirmButton: false,
+                                                    timer: 1500
+                                                });
+                                                navigate('/');
+                                            }
+                                        })
+                                    //start normal fetch
+    
+                                    // end normal fetch
+    
+                                })
+                                .catch(error => console.log(error))
                         })
-                            .then(res => res.json())
-                            .then(data => {
-                                if (data.insertedId) {
-                                    reset();
-                                    Swal.fire({
-                                        position: 'top-end',
-                                        icon: 'success',
-                                        title: 'User created successfully.',
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    });
-                                    navigate('/');
-                                }
-                            })
-
-
-
-                    })
-                    .catch(error => console.log(error))
+                    // end creating user, updating user data, post data to db
+    
+    
+                }
             })
+    
+    
+    
     };
 
 
@@ -132,7 +171,8 @@ const SignUp = () => {
                                         <label className="label">
                                             <span className="text-gray-800">Photo URL</span>
                                         </label>
-                                        <input type="text"  {...register("photoURL", { required: true })} placeholder="url" className="input input-bordered border-gray-700 border shadow-sm" />
+                                        {/* <input type="text"  {...register("photoURL", { required: true })} placeholder="url" className="input input-bordered border-gray-700 border shadow-sm" /> */}
+                                        <input type="file" {...register("photoURL", { required: true })} className="file-input file-input-bordered file-input-secondary w-full max-w-xs" />
                                         {errors.photoURL && <span className="text-red-600">Photo URL is required</span>}
                                     </div>
                                     <div className="form-control w-2/4">

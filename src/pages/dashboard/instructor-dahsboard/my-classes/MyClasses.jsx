@@ -1,12 +1,8 @@
-import React from 'react';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
-import { useQuery } from '@tanstack/react-query';
-import { useContext } from 'react';
-import { AuthContext } from '../../../../providers/AuthProvider';
-import useAllClasses_Instructor from '../../../../hooks/useAllClasses';
 import MyClass from './MyClass';
 import UseHandleDelete from '../../../../hooks/useHandleDelete';
 import Swal from 'sweetalert2';
+import useAllClasses_Instructor from '../../../../hooks/useAllClasses_Instructor';
 
 const MyClasses = () => {
 
@@ -17,10 +13,6 @@ const MyClasses = () => {
 
     const handleDelete = async (id) => {
         console.log("Hit delet btn")
-        // const response = UseHandleDelete(`/users/all-classes/${allClasses._id}?email=${user?.email}`);
-        // if(response) {
-        //     refetch();
-        // }
         
         try {
             console.log('im in try hook dlt')
@@ -41,9 +33,9 @@ const MyClasses = () => {
     }
 
     return (
-           <div className='w-full pl-16 pr-20 mt-32 relative  overflow-clip'>
-            <div className=" ">
-                <table className="table table-pin-rows">
+           <div className='w-full pl-16 pr-20 mt-32  '>
+            <div className="overflow-scroll h-screen ">
+                <table className="table table-pin-rows ">
                     {/* head */}
                     <thead className='z-10'>
                         <tr className='bg-slate-100 '>

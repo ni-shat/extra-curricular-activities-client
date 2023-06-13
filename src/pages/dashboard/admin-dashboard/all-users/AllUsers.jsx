@@ -53,31 +53,39 @@ const AllUsers = () => {
             })
     }
 
-    const handleDelete = async (user) => {
+    // const handleDelete = async (user) => {
 
-        const response = UseHandleDelete(`/users/${user._id}`);
-        if(response){
+    //     const response = UseHandleDelete(`/users/${user._id}`);
+    //     if(response){
+    //         refetch();
+    //     }
+    // }
+    const handleDelete = async (id) => {
+        console.log("Hit delet btn")
+        
+        try {
+            console.log('im in try hook dlt')
+            const response = await axiosSecure.delete(`/users/${id}`);
+    
+            console.log("data in delete hookkkk",response.data);
+           
+            Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+            )
             refetch();
+            return response.data;
+        } catch (error) {
+            console.error('error in deleteeeeeee hook',error);
         }
-
-        // try {
-        //     const response = await axiosSecure.delete(`/users/${user._id}`);
-        //     console.log(response.data);
-        //     refetch();
-        //     Swal.fire(
-        //         'Deleted!',
-        //         'Your file has been deleted.',
-        //         'success'
-        //     )
-        // } catch (error) {
-        //     console.error(error);
-        // }
     }
+
 
     return (
         <div className="w-full pl-16 pr-20">
             <Helmet>
-                <title>Music School | All users</title>
+                <title>Music School | Manage users</title>
             </Helmet>
             <div className="overflow-scroll h-screen mt-32">
                 <table className="table table-pin-rows   ">
@@ -116,7 +124,7 @@ const AllUsers = () => {
                                     </div>
 
                                 </td>
-                                <td><button onClick={() => handleDelete(user)} className="btn btn-ghost bg-red-600  text-white"><FaTrashAlt></FaTrashAlt></button></td>
+                                <td><button onClick={() => handleDelete(user._id)} className="btn btn-ghost bg-red-600  text-white"><FaTrashAlt></FaTrashAlt></button></td>
                             </tr>)
                         }
                     </tbody>
