@@ -1,10 +1,6 @@
-import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
-import { FaCheckCircle, FaEdit, FaTrashAlt } from 'react-icons/fa';
-import Swal from 'sweetalert2';
-import FeeadBackModal from './FeeadBackModal';
 import ManageClass from './ManageClass';
 
 const ManageClasses = () => {
@@ -26,7 +22,7 @@ const ManageClasses = () => {
             </Helmet>
             <div className="overflow-scroll h-screen mt-32">
                 <table className="table table-pin-rows   ">
-                    {/* head */}
+                    
                     <thead>
                         <tr className="bg-slate-100 z-10">
                             <th className="text-gray-800 font-roboto-bold text-base"></th>
@@ -40,8 +36,6 @@ const ManageClasses = () => {
                         </tr>
                     </thead>
                     <tbody className="overflow-scroll">
-                        {/*  Class Image, Class name, Instructor name, Instructor email, Available seats, Price, Status(pending/approved/denied) 3 buttons( Approve, Deny and send feedback).
- */}
                         {
                             allAvailableClasses.map((cls, index) => 
                             <ManageClass 

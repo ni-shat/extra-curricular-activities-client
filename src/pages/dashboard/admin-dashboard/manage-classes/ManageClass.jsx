@@ -1,6 +1,6 @@
 import React from 'react';
 import mail from '../../../../assets/mail.png';
-import { FaCheckCircle } from 'react-icons/fa';
+import { FaCheckCircle, FaEdit } from 'react-icons/fa';
 import { useState } from 'react';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
@@ -83,34 +83,39 @@ const ManageClass = ({ cls, index, refetch }) => {
                         disabled={(cls.status === 'approved' || cls.status === 'denied') ? true : false}
                     >Deny</button>
 
-                    {/* {
-                                            cls.feedback === '' &&
-                                            <label
-                                                onClick={() => handleModal(cls._id)}
-                                                htmlFor="my-modal-3"
-                                                className="btn btn-xs py-1 px-0 border font-semibold bg-yellow-500  text-white">
-                                                Send Feedback
-                                            </label>
+                    {
+                        cls.feedback === '' ?
+                        <label
+                            onClick={() => setSelectedRow(cls)}
+                            htmlFor="my-modal-3"
+                            className="btn btn-xs py-1 px-0 border font-semibold bg-yellow-500  text-white">
+                            Send Feedback
+                        </label>
                                             :
-                                                <>
-                                                    <label className="flex items-center justify-center gap-2 lowercase btn-xs py-1 px-0 border-0 hover:bg-yellow-100 rounded-none font-semibold bg-yellow-100  text-black"> feedback sent
-                                                        <label onClick={() => handleModal(cls._id)} htmlFor="my-modal-3"><FaEdit className='hover:text-yellow-800 -mt-0.5 hover:cursor-pointer' /></label>
+                    <div className='tooltip tooltip-bottom' data-tip={cls.feedback}>
+                        <label 
+                        className="flex items-center justify-center gap-2 lowercase btn-xs py-1 px-0 border-0 hover:bg-yellow-100 rounded-none font-semibold bg-yellow-100  text-black"
+                        > 
+                        feedback sent
+                            <label onClick={() => setSelectedRow(cls)} htmlFor="my-modal-3"><FaEdit className='hover:text-yellow-800 -mt-0.5 hover:cursor-pointer' /></label>
 
-                                                    </label>
-                                                </>
-                                        } */}
-                    <label
+                        </label>
+                    </div>
+                                        
+                    }
+                    {/* <label
                         onClick={() => setSelectedRow(cls)}
                         htmlFor="my-modal-3"
                         className="btn btn-xs py-1 px-0 border font-semibold bg-yellow-500  text-white">
                         Send Feedback
-                    </label>
+                    </label> */}
 
                     {
                         selectedRow && <FeeadBackModal
                             id={cls._id}
                             cls={cls}
-
+                            refetch={refetch}
+                            setSelectedRow={setSelectedRow}
                         ></FeeadBackModal>
                     }
 

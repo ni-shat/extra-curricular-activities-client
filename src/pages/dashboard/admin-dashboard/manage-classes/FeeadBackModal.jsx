@@ -3,40 +3,38 @@ import { useState } from 'react';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 
-const FeeadBackModal = ({ id , setClickedUpdate , cls }) => {
+const FeeadBackModal = ({ id, refetch, cls, setSelectedRow }) => {
 
-    const [toy, setToy] = useState([]);
-    console.log('class id feedback', cls.classTitle, id)
+    console.log(id, cls.classTitle)
 
-    // const [axiosSecure] = useAxiosSecure();
-    // const [textareaValue, setTextareaValue] = useState('');
+    const [axiosSecure] = useAxiosSecure();
+    const [textareaValue, setTextareaValue] = useState('');
 
     const handleClick = async () => {
 
-        // const saveFeedback = {
-        //     feedback: textareaValue
-        // }
+        const saveFeedback = { textareaValue };
 
-        // try {
 
-        //     axiosSecure.post(`/classes/feedback/${id}`, saveFeedback)
-        //         .then(data => {
-        //             console.log('after posting feedback', data.data)
-        //             if (data.data.modifiedCount) {
+        try {
 
-        //                 Swal.fire({
-        //                     position: 'top-end',
-        //                     icon: 'success',
-        //                     title: 'feedback is sent.',
-        //                     showConfirmButton: false,
-        //                     timer: 1500
-        //                 })
-        //             }
-        //         })
+            axiosSecure.post(`/classes/feedback/${id}`, saveFeedback)
+                .then(data => {
+                    console.log('after posting feedback', data.data)
+                    if (data.data.modifiedCount) {
+                        refetch();
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'feedback is sent.',
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                })
 
-        // } catch (error) {
-        //     console.error('error in feedback ', error);
-        // }
+        } catch (error) {
+            console.error('error in feedback ', error);
+        }
 
 
         //     console.log('im in try ')
@@ -51,7 +49,7 @@ const FeeadBackModal = ({ id , setClickedUpdate , cls }) => {
     };
 
     const handleCross = () => {
-        setClickedUpdate(false);
+        setSelectedRow(false);
     }
 
 
@@ -62,7 +60,6 @@ const FeeadBackModal = ({ id , setClickedUpdate , cls }) => {
                 <div className="modal-box bg-white text-black  h-[400px] relative ">
 
                     <button onClick={handleCross}><label htmlFor="my-modal-3" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label></button>
-
                     <div className=' h-fit px-8 pt-2 top-60 left-0 right-0 ml-auto mr-auto rounded-lg  '>
 
 
