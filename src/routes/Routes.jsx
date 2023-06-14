@@ -43,8 +43,7 @@ export const router = createBrowserRouter([
         },    
         {
           path: 'all-approved-classes',
-          element: <AllApprovedClasses></AllApprovedClasses>,
-          loader: () => fetch('/users/all-approved-classes')
+          element: <AllApprovedClasses></AllApprovedClasses>
         },    
       ]
     },

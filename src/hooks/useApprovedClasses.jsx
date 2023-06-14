@@ -5,16 +5,13 @@ import useAxiosSecure from "./useAxiosSecure";
 
 const useAllClasses = () => {
 
-    const { user, loading } = useContext(AuthContext);
-    const [axiosSecure] = useAxiosSecure();
-
-    const { data: all_Classes = [],  refetch } = useQuery({
+   
+    const { data: all_Classes = [], isLoading: loading, refetch } = useQuery({
         queryKey: ['all_Classes'],
-        enabled: !loading,
         queryFn: async () => {
-            const res = await axiosSecure('/users/all-approved-classes');
-            console.log('res from axios', res);
-            return res.data;
+            const res = await fetch('http://localhost:5000/all-approved-classes');
+
+            return res.json();
         }
     })
 

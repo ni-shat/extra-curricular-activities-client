@@ -37,15 +37,6 @@ const FeeadBackModal = ({ id, refetch, cls, setSelectedRow }) => {
         }
 
 
-        //     console.log('im in try ')
-        //     const response = await axiosSecure.post(`/classes/feedback/${id}`);
-        //     Swal.fire(
-        //         'Updated!',
-        //         'user request is approved.',
-        //         'success'
-        //     )
-        //     return response.data;
-
     };
 
     const handleCross = () => {

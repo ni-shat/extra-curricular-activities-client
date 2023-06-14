@@ -7,7 +7,7 @@ import Instructor from './Instructor';
 const Instructors = () => {
 
     const [getTeachers] = useTeachers();
-    console.log(getTeachers);
+    console.log("getTeachers", getTeachers);
 
     const [pageNumbers, setPageNumbers] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
@@ -31,6 +31,8 @@ const Instructors = () => {
         fetchData();
     }, [currentPage]);
 
+    console.log("teachers",teachers)
+
 
     return (
         <div>
@@ -51,7 +53,7 @@ const Instructors = () => {
 
             {/* teachers section */}
             {
-                teachers?.map(t => <Instructor key={t._id} teacher={t}></Instructor>)
+                teachers?.map(t => <Instructor key={t._id} teacher={t} ></Instructor>)
             }
 
 

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
 
@@ -11,6 +11,8 @@ const axiosSecure = axios.create({
 const useAxiosSecure = () => {
     const { logOut } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation(); 
+    console.log(location.pathname);
     
     useEffect(() => {
         axiosSecure.interceptors.request.use((config) => {
@@ -24,6 +26,9 @@ const useAxiosSecure = () => {
         axiosSecure.interceptors.response.use(
             (response) => response,
             async (error) => {
+                // if( location.pathname === '/all-approved-classes' ){
+                //     navigate('/all-approved-classes');
+                // }
                 if (error.response && (error.response.status === 401 || error.response.status === 403)) {
                     await logOut();
                     navigate('/login');
@@ -31,7 +36,7 @@ const useAxiosSecure = () => {
                 return Promise.reject(error);
             }
         );
-    }, [logOut, navigate]);
+    }, [ logOut, navigate]);
 
     return [axiosSecure];
 };

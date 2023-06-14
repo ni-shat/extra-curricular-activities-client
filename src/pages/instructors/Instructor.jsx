@@ -1,17 +1,26 @@
-import React from 'react';
-import t1 from '../../assets/teacher.jpg';
+import { useQuery } from '@tanstack/react-query';
 import mail from '../../assets/mail.png'
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const Instructor = ({ teacher }) => {
 
-    const { name, instructorImage, classes, email } = teacher;
+const { name, email, role, _id, userImage } = teacher;
+
+    const [axiosSecure] = useAxiosSecure();
+    const { data: t_classes = [], refetch } = useQuery(['users'], async () => {
+        const res = await axiosSecure.get(`/instructors-total-classes?email=${teacher.email}`)
+        return res.data;
+    })
+
+    console.log("in instructor page", t_classes, t_classes.length);
 
 
     return (
+
         <div className='mt-20 mb-20 w-[80%] mx-auto'>
             <div className='flex gap-5 items-center font-roboto-bold'>
                 <div className='w-2/4'>
-                    <img className='h-[560px] w-[500px] object-cover' src={instructorImage} alt="" />
+                    <img className='h-[560px] w-[500px] object-cover' src={userImage} alt="" />
                 </div>
                 <div className='w-2/4 h-full'>
                     <h2 className='font-roboto-extrabold  text-5xl text-red-500'>{name}</h2>
@@ -20,16 +29,16 @@ const Instructor = ({ teacher }) => {
                         <span>{email}</span>
                     </p>
                     <div className='divider bg-gray-700 w-[80%] h-0.5'></div>
-                    <p className='text-xl my-8'>Number of classes: <span className='text-2xl text-red-500 font-semibold'>{classes.length}</span></p>
+                    <p className='text-xl my-8'>Number of classes: <span className='text-2xl text-red-500 font-semibold'>{t_classes.length}</span></p>
                     <div className='flex flex-wrap  gap-2'>
                         {
-                            classes?.map((c, index) => <li className='btn btn-xs text-white' key={index}>{c.title}</li>)
+                            t_classes?.map((c, index) => <li className='btn btn-xs text-white' key={index}>{c.classTitle}</li>)
                         }
                     </div>
                     {/* <div className='flex justify-end items-end flex-col h-full mt-10'> */}
-                        <button className='btn btn-lg bg-transparent border-2 mt-11 rounded-full text-gray-800 hover:bg-white hover:text-red-600'>
-                            view more
-                        </button>
+                    <button className='btn btn-lg bg-transparent border-2 mt-11 rounded-full text-gray-800 hover:bg-white hover:text-red-600'>
+                        view more
+                    </button>
                     {/* </div> */}
                 </div>
             </div>

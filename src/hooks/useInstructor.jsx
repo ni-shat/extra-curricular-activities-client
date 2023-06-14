@@ -7,6 +7,15 @@ const useInstructor = () => {
     const {user, loading} = useContext(AuthContext);
     const [axiosSecure] = useAxiosSecure();
 
+    if(loading){
+        <p>loading...</p>
+    }
+
+    if(!user && !loading) {
+        const isInstructor = false
+        return [isInstructor];
+    }
+
     const {data: isInstructor, isLoading: isInstructorLoading} = useQuery({
         queryKey: ['isInstructor', user?.email],
         enabled: !loading,

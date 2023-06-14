@@ -32,7 +32,7 @@ const MyClass = ({ cls, index, handleDelete }) => {
             </td>
             <td className='font-bold text-xl '>
                 {
-                    status === 'approved' ? { total_enrolled } : ""
+                    status === 'approved' ? total_enrolled : ""
                 }
             </td>
             <th className='  w-20 '>

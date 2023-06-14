@@ -6,6 +6,16 @@ import useAxiosSecure from "./useAxiosSecure";
 const useAdmin = () => {
     const {user, loading} = useContext(AuthContext);
     const [axiosSecure] = useAxiosSecure();
+
+    if(loading){
+        <p>loading...</p>
+    }
+
+    if(!user && !loading) {
+        const isAdmin = false
+        return [isAdmin];
+    }
+
     // use axios secure with react query
     const {data: isAdmin, isLoading: isAdminLoading} = useQuery({
         queryKey: ['isAdmin', user?.email],
