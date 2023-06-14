@@ -53,13 +53,6 @@ const AllUsers = () => {
             })
     }
 
-    // const handleDelete = async (user) => {
-
-    //     const response = UseHandleDelete(`/users/${user._id}`);
-    //     if(response){
-    //         refetch();
-    //     }
-    // }
     const handleDelete = async (id) => {
         console.log("Hit delet btn")
         
