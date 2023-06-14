@@ -31,7 +31,7 @@ const DashBoard = () => {
 
                 </div>
                 <div className=" bg-[#E6E6E6] h-screen  border border-l-0 font-bold shadow-xl pt-10">
-                    <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+                    <label htmlFor="my-drawer-2" className="drawer-overlay "></label>
 
                     {
                         isStudent && <ULStudents></ULStudents>

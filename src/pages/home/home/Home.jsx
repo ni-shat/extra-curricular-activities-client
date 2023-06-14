@@ -13,7 +13,7 @@ const Home = () => {
             <Helmet>
                 <title>Music School | Home</title>
             </Helmet>
-            
+
             <Banner></Banner>
             <div className='w-[90%] mx-auto text-gray-800'>
                 <PopularProgram></PopularProgram>
