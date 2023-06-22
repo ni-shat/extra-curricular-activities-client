@@ -2,47 +2,35 @@ import React from 'react';
 import { FaCheck, FaMoneyCheckAlt, FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import useSelectedClasses from '../../../../hooks/useSelectedClasses';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 
 const TableRow = ({ selectedCls, index }) => {
 
-    const { _id, title, image, schedule, instructor, price } = selectedCls;
+    const { _id, classId, instructorEmail, instructorName, userEmail, classImage, classTitle, price, status, instructorImage } = selectedCls;
     const [, refetch] = useSelectedClasses();
     const location = useLocation();
     console.log(location.pathname)
+    const [axiosSecure] = useAxiosSecure();
 
-    const handleDelete = cls => {
+    const handleDelete = async (id) => {
 
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#7ec7b5',
-            confirmButtonText: 'Yes, delete it!'
-        })
-            .then((result) => {
+        try {
+            console.log('im in try hook dlt')
+            const response = await axiosSecure.delete(`/my-selected-classes/${id}`);
 
-                if (result.isConfirmed) {
+            console.log("data in delete hookkkk", response.data);
 
-                    fetch(`http://localhost:5000/selected-classes/${cls._id}`, {
-                        method: 'DELETE'
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            // console.log("Nishat data",data);
-                            if (data.deletedCount > 0) {
-                                refetch();
-                                Swal.fire(
-                                    'Deleted!',
-                                    'Your file has been deleted.',
-                                    'success'
-                                )
-                            }
-                        })
-                }
-            })
+            Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+            )
+            refetch();
+            return response.data;
+        } catch (error) {
+            console.error('error in deleteeeeeee hook', error);
+        }
     }
 
 
@@ -57,25 +45,29 @@ const TableRow = ({ selectedCls, index }) => {
                 <div className="flex items-center space-x-3">
                     <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
-                            <img src={image} />
+                            <img src={classImage} />
                         </div>
                     </div>
                     <div>
-                        <div className="font-bold">{title}</div>
-                        <div className="text-sm opacity-50">{schedule}</div>
+                        <div className="font-bold">{classTitle}</div>
+                        {/* <div className="text-sm opacity-50">{price}</div> */}
                     </div>
                 </div>
             </td>
             <td>
-                {instructor}
+                {instructorName}
             </td>
-            <td>{price}</td>
+            <td>$ {price}</td>
             <th>
                 {
                     location.pathname === '/dashboard/enrolled-classes' ? <button className="btn btn-ghost btn-outline btn-xs text-green-600">Enrolled<FaCheck /></button> :
                         <div className='flex flex-col gap-2 justify-center items-start'>
-                            <button className="btn btn-ghost btn-outline btn-xs text-green-600"><FaMoneyCheckAlt /> pay</button>
-                            <button onClick={() => handleDelete(selectedCls)} className="btn btn-ghost btn-outline btn-xs text-red-700"><FaTrash /> Delete</button>
+                            {
+                                status === 'enrolled' ? <button className="btn bg-gray-100 hover:cursor-default hover:bg-gray-100 text-gray-400 hover:text-gray-400 btn-ghost btn-outline btn-xs border-0"><FaMoneyCheckAlt /> pay</button> :
+                                    <Link to={`/dashboard/payment/${_id}`}><button className="btn btn-ghost btn-outline btn-xs text-green-600"><FaMoneyCheckAlt /> pay</button></Link>
+                            }
+
+                            <button onClick={() => handleDelete(_id)} className="btn btn-ghost btn-outline btn-xs text-red-700"><FaTrash /> Delete</button>
                         </div>
                 }
             </th>

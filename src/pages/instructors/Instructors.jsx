@@ -39,6 +39,7 @@ const Instructors = () => {
             <div className='absolute top-0 bg-transparent w-full'>
                 <Navbar></Navbar>
             </div>
+            
             <div className='bg-white'>
                 <div className="hero h-[540px] bg-[url('/bg--.jpg')]">
                     <div className="hero-overlay bg-black bg-opacity-60"></div>
@@ -51,7 +52,6 @@ const Instructors = () => {
                 </div>
             </div>
 
-            {/* teachers section */}
             {
                 teachers?.map(t => <Instructor key={t._id} teacher={t} ></Instructor>)
             }

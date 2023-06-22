@@ -5,7 +5,7 @@ import useAxiosSecure from "./useAxiosSecure";
 
 const useAllClasses = () => {
 
-   
+
     const { data: all_Classes = [], isLoading: loading, refetch } = useQuery({
         queryKey: ['all_Classes'],
         queryFn: async () => {

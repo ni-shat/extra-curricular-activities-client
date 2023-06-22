@@ -7,17 +7,16 @@ const SelectedClasses = () => {
 
     // const [selected_cls, setSelected_cls] = useState();
     const [selectedClasses] = useSelectedClasses();
-    // console.log(selectedClasses)
    
 
 
     return (
         <div className='w-full pl-16 pr-20'>
-            <div className="overflow-x-auto ">
-                <table className="table">
+            <div className="overflow-scroll h-screen mt-32 ">
+                <table className="table table-pin-rows">
                     {/* head */}
                     <thead>
-                        <tr>
+                        <tr className='bg-slate-100 z-10'>
                             <th className='text-gray-800 font-roboto-bold text-base'>
                                 
                             </th>

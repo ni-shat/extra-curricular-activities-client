@@ -35,16 +35,18 @@ const ApprovedClass = ({ cls, isInstructor, isAdmin, refetch }) => {
             const saveClass = {
                 classId: classId,
                 instructorEmail: email,
+                userEmail: user?.email,
                 classImage,
                 classTitle,
                 price,
                 status: "selected",
-                instructorImage
+                instructorImage,
+                instructorName: instructor
             }
             try {
                 axiosSecure.post(`/selected-classes/${classId}?email=${user?.email}`, saveClass)
                     .then(data => {
-                        console.log('after posting feedback', data.data)
+                        console.log('after selecting class', data.data)
                         if (data.data.insertedId) {
                             // refetch();
                             Swal.fire({
@@ -54,34 +56,24 @@ const ApprovedClass = ({ cls, isInstructor, isAdmin, refetch }) => {
                                 showConfirmButton: false,
                                 timer: 1500
                             })
-                        }
 
-                        // successfully inserted, now do patch
-                        try {
-
-                            axiosSecure.patch(`/all-approved-classes/seats/${classId}`)
-                                .then(data => {
-                                    console.log('after changing seats', data)
-                                    if (data.data.modifiedCount) {
-                                        refetch();
-                                        Swal.fire({
-                                            position: 'top-end',
-                                            icon: 'success',
-                                            title: 'seats are changed.',
-                                            showConfirmButton: false,
-                                            timer: 1500
-                                        })
-                                    }
-                                })
-                
-                        } catch (error) {
-                            console.error('error in feedback ', error);
                         }
-                        // end patch
+                        else if(  Object.keys(data.data).length === 0  ){
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'warning',
+                                title: 'You already selected this class.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        }
+                        
                     })
+
             } catch (error) {
                 console.error('error in post hook', error);
             }
+
         }
     }
 
@@ -91,7 +83,7 @@ const ApprovedClass = ({ cls, isInstructor, isAdmin, refetch }) => {
             <div className='text-black'>
                 {
                     cls.status !== 'denied' && <div >
-                        <div className={`relative border  h-[500px] flex flex-col border-transparent w-[1/4]`}>
+                        <div className={`relative border ${parseInt(availableSeats) === 0 ? 'bg-red-200' : 'bg-white'}  h-[500px] flex flex-col border-transparent w-[1/4]`}>
 
                             <img className="w-full h-[300px] object-cover  cursor-pointer  bg-gradient-to-b from-transparent to-black mix-blend-multiply" src={classImage} alt="" />
                             <div className='absolute top-10 right-0 bg-white text-xl font-bold px-0.5'>

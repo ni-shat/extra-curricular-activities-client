@@ -6,13 +6,15 @@ const Instructor = ({ teacher }) => {
 
 const { name, email, role, _id, userImage } = teacher;
 
+    //teacher.email
+
     const [axiosSecure] = useAxiosSecure();
-    const { data: t_classes = [], refetch } = useQuery(['users'], async () => {
-        const res = await axiosSecure.get(`/instructors-total-classes?email=${teacher.email}`)
+    const { data: t_classes = [], refetch } = useQuery(['total_classesss'], async () => {
+        const res = await axiosSecure.get(`/instructors-total-classes?email=${email}`)
         return res.data;
     })
 
-    console.log("in instructor page", t_classes, t_classes.length);
+    console.log("in instructor page", t_classes);
 
 
     return (

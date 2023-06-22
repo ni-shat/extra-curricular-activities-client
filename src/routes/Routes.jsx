@@ -18,6 +18,8 @@ import MyClasses from "../pages/dashboard/instructor-dahsboard/my-classes/MyClas
 import AllApprovedClasses from "../pages/AllClasses/AllApprovedClasses";
 import DashboardPrivateRoute from "./DashboardPrivateRoute";
 import ManageClasses from "../pages/dashboard/admin-dashboard/manage-classes/ManageClasses";
+import Payment from "../pages/dashboard/student-dashboard/payment/Payment";
+import PaymentHistory from "../pages/dashboard/student-dashboard/payment/PaymentHistory";
 
 
 export const router = createBrowserRouter([
@@ -78,6 +80,14 @@ export const router = createBrowserRouter([
         {
           path: 'my-classes', 
           element: <DashboardPrivateRoute><MyClasses></MyClasses></DashboardPrivateRoute>
+        },
+        {
+          path: 'payment/:id', 
+          element: <DashboardPrivateRoute><Payment></Payment></DashboardPrivateRoute>
+        },
+        {
+          path: 'payment-history', 
+          element: <DashboardPrivateRoute><PaymentHistory></PaymentHistory></DashboardPrivateRoute>
         },
 
       ]

@@ -24,7 +24,7 @@ const DashboardPrivateRoute = ({ children }) => {
         
         ((location.pathname === '/dashboard/manage-users' || location.pathname === '/dashboard/manage-classes') && !isAdmin) ||
         ((location.pathname === '/dashboard/my-classes' || location.pathname === '/dashboard/add-class') && !isInstructor) || 
-        ((location.pathname === '/dashboard/selected-classes' || location.pathname === '/dashboard/enrolled-classes') && !isStudent)
+        ((location.pathname === '/dashboard/selected-classes' || location.pathname === '/dashboard/enrolled-classes' || location.pathname === '/dashboard/payment') && !isStudent)
     ) 
     {
         console.log("in qrong route if - first");

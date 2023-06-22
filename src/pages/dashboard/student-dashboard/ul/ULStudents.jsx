@@ -28,12 +28,16 @@ const ULStudents = () => {
                                     <ActiveLink to="/dashboard/enrolled-classes"><button className="flex items-center gap-2 mb-5"><FaHome></FaHome> <p>Enrolled Classes</p></button>
                                     </ActiveLink>
                                 </li>
+                                <li>
+                                    <ActiveLink to="/dashboard/payment-history"><button className="flex items-center gap-2 mb-5"><FaHome></FaHome> <p>Payment History</p></button>
+                                    </ActiveLink>
+                                </li>
                             </>
                         }
 
                         <div className="divider h-[0.1px] bg-black w-[80%]"></div>
                         <li><ActiveLink to="/"><button className="flex items-center gap-2 my-5"><FaHome></FaHome> <p>User Home</p></button> </ActiveLink> </li>
-                        <li><ActiveLink to="/menu"> <button className="flex items-center gap-2 mb-5"><FaHome></FaHome> <p>User ALl Classes</p></button> </ActiveLink></li>
+                        <li><ActiveLink to="/menu"> <button className="flex items-center gap-2 mb-5"><FaHome></FaHome> <p>User All Classes</p></button> </ActiveLink></li>
                         <li><ActiveLink to="/order/salad"><button className="flex items-center gap-2 mb-5"><FaHome></FaHome> <p>Enroll</p></button> </ActiveLink></li>
                         <li><ActiveLink to="/order/salad"><button className="flex items-center gap-2 mb-5"><FaHome></FaHome> <p>About Us</p></button> </ActiveLink></li>
                     </ul>
