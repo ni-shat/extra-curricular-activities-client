@@ -7,21 +7,24 @@ const useInstructor = () => {
     const {user, loading} = useContext(AuthContext);
     const [axiosSecure] = useAxiosSecure();
 
-    if(loading){
-        <p>loading...</p>
-    }
+    // console.log(user, loading)
 
-    if(!user && !loading) {
-        const isInstructor = false
-        return [isInstructor];
-    }
+    // if(loading){
+    //   return  { isInstructor: false }
+    // }
 
+    // // if(!user && !loading) {
+    // //     const isInstructor = false
+    // //     return [isInstructor];
+    // // }
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const {data: isInstructor, isLoading: isInstructorLoading} = useQuery({
         queryKey: ['isInstructor', user?.email],
         enabled: !loading,
         queryFn: async () => {
             const res = await axiosSecure.get(`/users/instructor/${user?.email}`);
-            console.log("is instructor response ",res)
+            // console.log("is instructor response ",res)
             return res.data.instructor;
         }
     })

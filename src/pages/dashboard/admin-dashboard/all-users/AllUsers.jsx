@@ -13,6 +13,8 @@ const AllUsers = () => {
         return res.data;
     })
 
+    
+
     const handleMakeAdmin = user => {
         fetch(`http://localhost:5000/users/admin/${user._id}`, {
             method: 'PATCH'
@@ -55,13 +57,13 @@ const AllUsers = () => {
 
     const handleDelete = async (id) => {
         console.log("Hit delet btn")
-        
+
         try {
             console.log('im in try hook dlt')
             const response = await axiosSecure.delete(`/users/${id}`);
-    
-            console.log("data in delete hookkkk",response.data);
-           
+
+            console.log("data in delete hookkkk", response.data);
+
             Swal.fire(
                 'Deleted!',
                 'Your file has been deleted.',
@@ -70,18 +72,18 @@ const AllUsers = () => {
             refetch();
             return response.data;
         } catch (error) {
-            console.error('error in deleteeeeeee hook',error);
+            console.error('error in deleteeeeeee hook', error);
         }
     }
 
 
     return (
-        <div className="w-full pl-16 pr-20">
+        <div className="w-full pl-6 pr-5 ">
             <Helmet>
                 <title>Music School | Manage users</title>
             </Helmet>
-            <div className="overflow-scroll h-screen mt-32">
-                <table className="table table-pin-rows   ">
+            <div className=" h-screen pt-28 ">
+                <table className="table table-pin-rows ">
                     {/* head */}
                     <thead>
                         <tr className="bg-slate-100 z-10">
@@ -92,7 +94,7 @@ const AllUsers = () => {
                             <th className="text-gray-800 font-roboto-bold text-base">Action</th>
                         </tr>
                     </thead>
-                    <tbody className="overflow-scroll">
+                    <tbody className="overflow-scroll bg-white">
                         {
                             users.map((user, index) => <tr key={user._id}>
                                 <th>{index + 1}</th>
@@ -102,14 +104,14 @@ const AllUsers = () => {
                                     <div className="flex gap-3">
                                         <div>
                                             {
-                                                user.role === 'admin' ? <button disabled className=" text-green-600 btn-xs bg-green-100 text-base flex items-center gap-2"><span>admin</span>  <FaCheckCircle/> </button>
+                                                user.role === 'admin' ? <button disabled className=" text-green-600 btn-xs bg-green-100 text-base flex items-center gap-2"><span>admin</span>  <FaCheckCircle /> </button>
                                                     :
                                                     <button onClick={() => handleMakeAdmin(user)} className="btn btn-xs bg-green-500  text-white">make admin</button>
                                             }
                                         </div>
                                         <div>
                                             {
-                                                user.role === 'instructor' ? <button disabled className=" text-blue-600 btn-xs bg-blue-100 text-base flex items-center gap-2"><span>instructor</span>  <FaCheckCircle/> </button>
+                                                user.role === 'instructor' ? <button disabled className=" text-blue-600 btn-xs bg-blue-100 text-base flex items-center gap-2"><span>instructor</span>  <FaCheckCircle /> </button>
                                                     :
                                                     <button onClick={() => handleInstructorAdmin(user)} className="btn btn-xs border bg-blue-500  text-white">Make instructor</button>
                                             }
@@ -122,6 +124,9 @@ const AllUsers = () => {
                         }
                     </tbody>
                 </table>
+                <div className="mt-10 text-transparent">
+                   ssitatibus, esse nam sit. Quam qui obcaecati corrupti. Temporibus minus officiis voluptate. Voluptates, adipisci voluptate.
+                </div>
             </div>
         </div>
     );

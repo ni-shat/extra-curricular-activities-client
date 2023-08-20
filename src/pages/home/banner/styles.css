@@ -1,0 +1,131 @@
+#banner {
+    height: 100%;
+}
+
+html,
+body {
+    position: relative;
+    height: 100%;
+}
+
+.swiper {
+    width: 100%;
+    padding: 0;
+}
+
+.swiper-slide {
+
+
+    /* Center slide text vertically */
+    /* display: flex;
+      justify-content: center;
+      align-items: center; */
+}
+
+.swiper-slide img {
+    /* display: block; */
+    /* width: 100%;
+      height: 100%; */
+    /* object-fit: cover; */
+}
+
+.swiper-pagination {
+    margin-top: 500px;
+    margin-left: 500px;
+    transform: rotate(90deg);
+}
+
+.swiper-pagination,
+.swiper-pagination-clickable,
+.swiper-pagination-bullets,
+.swiper-pagination-horizontal {
+    width: 100px;
+    height: 100px;
+
+}
+
+.swiper-horizontal>.swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
+    position: absolute;
+    right: 100px;
+    bottom: 50px;
+}
+
+.swiper-pagination-bullet {
+    width: 11px;
+    height: 11px;
+    background-color: #eb6767;
+}
+
+
+/* .text-animation {
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: transform 1s ease, opacity 0.2s ease;
+  }
+  
+  
+  .swiper-slide-active .text-animation {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  
+  
+  .button-animation {
+    opacity: 0;
+    transform: translateY(200%);
+    
+    transition: transform 0.6s ease, opacity 0.2s ease;
+  }
+  
+  
+  .swiper-slide-active .button-animation {
+    transform: translateY(0);
+    opacity: 1;
+  } */
+
+
+/* .text-animation {
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: transform 1s ease, opacity 0.2s ease;
+  } */
+
+.text-animation {
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: transform 1s ease 0.2s, opacity 0.2s ease 0.2s;
+    /* Add a delay of 1s to the transitions */
+}
+
+.text-p-animation {
+    transform: translateY(140%);
+    opacity: 0;
+    transition: transform 0.7s ease 1s, opacity 0.2s ease 1s;
+    /* Add a delay of 1s to the transitions */
+}
+
+.swiper-slide-active .text-animation {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.swiper-slide-active .text-p-animation {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+
+.button-animation {
+    opacity: 0;
+    transform: translateY(200%);
+    transition: transform 0.6s ease 1.7s, opacity 0.2s ease 1.7s;
+    /* Add a delay of 1s to the transitions */
+}
+
+.swiper-slide-active .button-animation {
+    transform: translateY(0);
+    opacity: 1;
+}

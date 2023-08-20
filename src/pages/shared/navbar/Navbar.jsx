@@ -4,13 +4,19 @@ import { Link, useLocation } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../../providers/AuthProvider';
 import { FaUserCircle } from 'react-icons/fa';
-import ActiveLinkHome from '../../../components/ActiveLinkHome';
+import ActiveLinkHome from '../../../components/ActiveLinkDashboard';
+import { PropagateLoader } from 'react-spinners';
+
 
 const Navbar = () => {
     const location = useLocation();
     // console.log(location)
     // console.log(location.pathname)
-    const { user, logOut } = useContext(AuthContext);
+    const { user, logOut, loading } = useContext(AuthContext);
+
+    if (loading) {
+        return <PropagateLoader color="#DC2828" />
+    }
 
     const handleLogOut = () => {
         logOut()

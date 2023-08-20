@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import Navbar from '../shared/navbar/Navbar';
+import React, { useContext, useState } from 'react';
 // import bg from ''
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProvider';
@@ -8,6 +7,7 @@ import Swal from 'sweetalert2';
 import GoogleLogin from '../shared/social-login/GoogleLogin';
 import { Helmet } from 'react-helmet';
 import Footer from '../shared/footer/Footer';
+import { BeatLoader } from 'react-spinners';
 
 const img_hosting_token = import.meta.env.VITE_IMAGE_UPLOAD_TOKEN;
 
@@ -20,14 +20,15 @@ const SignUp = () => {
     const { createUser, updateUserProfile, user } = useContext(AuthContext);
     const navigate = useNavigate();
     const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`
+    const [isLoading, setIsLoading] = useState(false);
 
     const onSubmit = data => {
 
         console.log(data)
-    
+
         const formData = new FormData();
         formData.append('image', data.photoURL[0]);
-    
+
         fetch(img_hosting_url, {
             method: 'POST',
             body: formData
@@ -35,11 +36,11 @@ const SignUp = () => {
             .then(res => res.json())
             .then(imgResponse => {
                 console.log(imgResponse);
-    
+
                 if (imgResponse.success) {
                     const imgURL = imgResponse.data.display_url;
                     console.log(imgURL);
-    
+
                     // const saveUser = {
                     //     name: data.name,
                     //     email: data.email,
@@ -49,15 +50,15 @@ const SignUp = () => {
                     //     phone: data.phone
                     // }
                     // console.log(saveUser)
-    
-    
+
+
                     // write fecth after that
                     // create user using firebase
                     createUser(data.email, data.password)
                         .then(result => {
                             const loggedUser = result.user;
                             console.log(loggedUser);
-    
+
                             updateUserProfile(data.name, imgURL) // update user profile
                                 .then(() => {
                                     const saveUser = {
@@ -80,6 +81,7 @@ const SignUp = () => {
                                         .then(data => {
                                             if (data.insertedId) {
                                                 reset();
+                                                setIsLoading(false);
                                                 Swal.fire({
                                                     position: 'top-end',
                                                     icon: 'success',
@@ -91,32 +93,34 @@ const SignUp = () => {
                                             }
                                         })
                                     //start normal fetch
-    
+
                                     // end normal fetch
-    
+
                                 })
-                                .catch(error => console.log(error))
+                                .catch(error => {
+                                    console.log(error)
+                                    setIsLoading(false);
+                                })
                         })
                     // end creating user, updating user data, post data to db
-    
-    
+
+
                 }
             })
-    
-    
-    
+
+
+
     };
 
 
     return (
         <div className='bg-[../../assets/bg-signup.svg] bg-cover bg-center'>
-             <Helmet>
-                <title>Music School | Signup</title>
+            <Helmet>
+                <title>TALENTO | Signup</title>
             </Helmet>
 
             <h3 className='font-monoton-lg opacity-10 text-gray-500  whitespace-nowrap text-center -rotate-90 absolute -left-52 top-[42%] '>Signup</h3>
 
-            <Navbar></Navbar>
             <div className="pt-32 pb-0 bg-white">
                 <div className="flex w-[80%] mx-auto items-center justify-center ">
                     <div className='w-[65%]'>
@@ -166,13 +170,13 @@ const SignUp = () => {
                                     </div>
                                 </div>
 
-                                <div className='flex gap-4'>
+                                <div className='flex gap-4 w-full'>
                                     <div className="form-control w-2/4">
                                         <label className="label">
                                             <span className="text-gray-800">Photo URL</span>
                                         </label>
                                         {/* <input type="text"  {...register("photoURL", { required: true })} placeholder="url" className="input input-bordered border-gray-700 border shadow-sm" /> */}
-                                        <input type="file" {...register("photoURL", { required: true })} className="file-input file-input-bordered file-input-secondary w-full max-w-xs" />
+                                        <input type="file" {...register("photoURL", { required: true })} className="file-input file-input-bordered file-input-secondary w-full " />
                                         {errors.photoURL && <span className="text-red-600">Photo URL is required</span>}
                                     </div>
                                     <div className="form-control w-2/4">
@@ -202,11 +206,15 @@ const SignUp = () => {
                                 <label className="label">
                                     <a href="#" className="text-gray-400 link link-hover">Forgot password?</a>
                                 </label>
-                                <div className="form-control mt-6">
-                                    <input className="btn btn-primary text-white" type="submit" value="Sign Up" />
+                                <div className="form-control mt-6 relative">
+                                    <input className="btn btn-primary text-white" type="submit" value={isLoading ? "Loading..." : "Sign up"} />
+                                    {
+                                        isLoading && <BeatLoader className='absolute top-2/4 -translate-y-2.5 right-20 ' color="#82faac" />
+                                    }
                                 </div>
                             </form>
-                            <div className='card-body -mt-10'>
+                            <div className='card-body -mt-10 flex flex-col items-center'>
+                                <p className="text-base mt-6 mb-3 text-gray-500 font-normal text-center">Connect With</p>
                                 <GoogleLogin></GoogleLogin>
                                 <div className='flex mt-10 justify-center'>
                                     <Link to='/login'>Already Have an account? <span className='text-red-600 font-bold'>log in</span></Link>

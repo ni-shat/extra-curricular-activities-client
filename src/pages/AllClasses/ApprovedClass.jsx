@@ -9,15 +9,25 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const ApprovedClass = ({ cls, isInstructor, isAdmin, refetch }) => {
 
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
-    console.log("im in approved class")
-    const { availableSeats, classImage, classTitle, email, instructor, instructorImage, price, total_enrolled, _id } = cls;
+
+    useEffect(() => {
+        AOS.init();
+    }, []);
+
+
+    const { availableSeats, classImage, classTitle, classDescription, email, instructor, instructorImage, price, total_enrolled, _id } = cls;
 
     const [axiosSecure] = useAxiosSecure();
+
+    // console.log("this class", cls)
 
 
     const handleSelect = async (classId) => {
@@ -29,7 +39,7 @@ const ApprovedClass = ({ cls, isInstructor, isAdmin, refetch }) => {
                 showConfirmButton: false,
                 timer: 1500
             })
-            navigate('/login');
+            // navigate('/login');
         }
         else {
             const saveClass = {
@@ -58,7 +68,7 @@ const ApprovedClass = ({ cls, isInstructor, isAdmin, refetch }) => {
                             })
 
                         }
-                        else if(  Object.keys(data.data).length === 0  ){
+                        else if (Object.keys(data.data).length === 0) {
                             Swal.fire({
                                 position: 'top-end',
                                 icon: 'warning',
@@ -67,7 +77,7 @@ const ApprovedClass = ({ cls, isInstructor, isAdmin, refetch }) => {
                                 timer: 1500
                             })
                         }
-                        
+
                     })
 
             } catch (error) {
@@ -80,33 +90,44 @@ const ApprovedClass = ({ cls, isInstructor, isAdmin, refetch }) => {
 
     return (
         <>
-            <div className='text-black'>
+            <div
+                data-aos="fade-up"
+                data-aos-duration="900"
+                className='text-black w-[320px] h-[505px] '>
                 {
                     cls.status !== 'denied' && <div >
-                        <div className={`relative border ${parseInt(availableSeats) === 0 ? 'bg-red-200' : 'bg-white'}  h-[500px] flex flex-col border-transparent w-[1/4]`}>
+                        <div className={`relative border ${parseInt(availableSeats) === 0 ? 'bg-red-200' : 'bg-white'}  h-[500px] flex flex-col border-transparent `}>
 
-                            <img className="w-full h-[300px] object-cover  cursor-pointer  bg-gradient-to-b from-transparent to-black mix-blend-multiply" src={classImage} alt="" />
+                            <img className="w-full h-[250px] object-cover  cursor-pointer  bg-gradient-to-b from-transparent to-black mix-blend-multiply" src={classImage} alt="" />
                             <div className='absolute top-10 right-0 bg-white text-xl font-bold px-0.5'>
                                 {availableSeats} seats available
                             </div>
 
                             <div className="text-black flex-grow  flex flex-col h-fit">
                                 {/* <h3 className="text-3xl mb-4 font-roboto-bold"> {c?.title.split(' ').slice(0, 2).join(' ')}</h3> */}
-                                <p className="text-3xl font-roboto-extrabold mt-1.5">{classTitle}</p>
+                                <p className="text-2xl font-roboto-bold font-semibold mt-1.5">{classTitle}</p>
                             </div>
-                            <hr className='w-[80%]  mb-1 h-0.5 bg-black' />
+                            {
+                                classDescription &&
+                                <div className="text-black flex-grow  flex flex-col h-fit">
+                                    <p className="text-xs poppin mt-1.5">{classDescription}</p>
+                                </div>
+                            }
+                            <hr className='w-[80%]  my-1.5 h-0.5 bg-black' />
                             <div className="text-black flex-end  mb-3 flex flex-col h-fit">
                                 {/* <h3 className="text-3xl mb-4 font-roboto-bold"> {c?.title.split(' ').slice(0, 2).join(' ')}</h3> */}
                                 <p className="text-xl font-roboto-bold"><span className='text-sm'>instructor <br /></span> <span className='text-blue-800'>{instructor}</span></p>
                             </div>
                             <div className="text-white bg-red-600 absolute top-20 right-0 px-1 flex items-center h-fit">
                                 {/* <h3 className="text-3xl mb-4 font-roboto-bold"> {c?.title.split(' ').slice(0, 2).join(' ')}</h3> */}
-                                <FaDollarSign className='text-xs' />
-                                <p className="text-xl font-roboto-bold">{price}</p>
+                                {/* <FaDollarSign className='text-xs' /> */}
+                                <p className="text-xl font-roboto-bold">৳ {price}</p>
 
                             </div>
-                            <button className='btn text-white disabled:bg-opacity-10 disabled:bg-black disabled:text-gray-600'
-                                disabled={(isAdmin || isInstructor || (parseInt(availableSeats) === 0)) ? true : false}
+                            <button className={`py-2.5 text-base text-white 
+                                ${(isAdmin || isInstructor || (parseInt(availableSeats) === 0)) ? 'cursor-not-allowed bg-gray-200 hover:bg-gray-200 border-0 text-gray-600' : 'cursor-pointer bg-black hover:bg-opacity-60'}
+                            `}
+                                // disabled={(isAdmin || isInstructor || (parseInt(availableSeats) === 0)) ? true : false}
                                 onClick={() => handleSelect(_id)}
                             >Select</button>
                         </div>

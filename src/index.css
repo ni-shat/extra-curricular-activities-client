@@ -34,10 +34,15 @@
     font-size: 150px;
 }
 
+.poppin {
+    font-family: 'Poppins', sans-serif;
+}
+
 .font-roboto {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
 }
+
 .font-roboto-extrabold {
     font-family: 'Roboto', sans-serif;
     font-weight: 800;
@@ -47,8 +52,192 @@
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
 }
+
 .font-roboto-bold {
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
 }
 
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.secondary-custom {
+    color: #82faac;
+}
+
+
+.roboto {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    font-size: 50px;
+}
+
+.roboto-semi {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+}
+
+.robo {
+    font-family: 'Roboto', sans-serif;
+}
+
+.roboto-semi-bold {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 800;
+}
+
+.roboto-normal {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    /* font-size: 20px; */
+}
+
+.roboto-normal-500 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+}
+
+.roboto-normal-400 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+.mont {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.mont-a {
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-size: 50px;
+}
+
+.monoton {
+    font-family: 'Monoton', cursive;
+    font-size: 50px;
+}
+
+.cal {
+    font-family: 'Lexend Peta', sans-serif;
+    font-weight: 700;
+}
+
+.maven {
+    font-family: 'Maven Pro', sans-serif;
+    font-weight: 500;
+}
+
+.mave {
+    font-family: 'Maven Pro', sans-serif;
+}
+
+.maven-300 {
+    font-family: 'Maven Pro', sans-serif;
+    font-weight: 300;
+}
+
+.bg-primary {
+    background-color: #FFA500;
+}
+
+.text-primary {
+    color: #FFA500;
+}
+
+.theme-blue {
+    color: #1e326e;
+}
+
+.font-medium-custom {
+    font-weight: 900px;
+}
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.circle {
+    border-radius: 50%;
+    animation: zoomInOut 2s infinite;
+}
+
+/* @keyframes zoomInOut {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+} */
+
+
+.custom-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    /* animation: moveDown 0.s forwards, fadeIn 0.3s 2s ease-in-out forwards; */
+    animation: moveDown 0.8s 2.2s forwards;
+}
+
+@keyframes moveDown {
+    0% {
+        top: -40px;
+    }
+
+    100% {
+        top: 0px;
+        opacity: 1;
+        /* Adjust this value to set how far the navbar should move down */
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
+
+.dropdown:is(:not(details)) .dropdown-content-custom {
+    visibility: hidden;
+    opacity: 0;
+    transform-origin: top;
+    --tw-scale-x: .95;
+    --tw-scale-y: .95;
+    transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-duration: 200ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+.dropdown.dropdown-open .dropdown-content-custom,
+.dropdown:not(.dropdown-hover):focus .dropdown-content-custom,
+.dropdown:focus-within .dropdown-content-custom {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* 
+.dropdown-content-custom.closed {
+    display: none; 
+  } */

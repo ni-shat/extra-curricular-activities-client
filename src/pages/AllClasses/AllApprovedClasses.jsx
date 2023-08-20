@@ -1,53 +1,83 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useAllClasses from '../../hooks/useApprovedClasses';
 import ApprovedClass from './ApprovedClass';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import Navbar from '../shared/navbar/Navbar';
-import NavbarDashboard from '../dashboard/navbar/NavbarDashboard';
-import logo from '../../assets/logo-black.svg';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
-import { useQuery } from '@tanstack/react-query';
 import useAdmin from '../../hooks/useAdmin';
 import useInstructor from '../../hooks/useInstructor';
+import useStudent from '../../hooks/useStudent';
+import { useLocation } from 'react-router-dom';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
+import RetrieveCategories from '../../utilities/RetrieveCategories';
+import CategoryTabPanel from './CategoryTabPanel';
+
+
 
 const AllApprovedClasses = () => {
 
+    const location = useLocation();
+    // console.log("location", location.pathname)
+    if (location.pathname === '/all-approved-classes') {
+        // console.log("NIhstatat");
+    }
 
     const [isAdmin] = useAdmin();
     const [isInstructor] = useInstructor();
+    // const [isStudent] = useStudent();
+
+    const [tabIndex, setTabIndex] = useState(0);
+    // const { categoriesAr, toysOfCategories } = RetrieveCategories();
+    const [selectedOption, setSelectedOption] = useState('search by category');
+
 
 
 
     const [all_Classes, refetch] = useAllClasses();
-    console.log("in all approved classes", all_Classes);
+    // console.log("in all approved classes", all_Classes);
+
+    const { categoriesAr, classesOfCategories } = RetrieveCategories();
+
 
 
     return (
         <div className=''>
-            <div className='flex items-center'>
-                <img className='w-[75px] mt-2 ml-1 h-[75px]' src={logo} alt="" />
-                <NavbarDashboard></NavbarDashboard>
-            </div>
-            {/* <div>
-                <h3 className='uppercase font-extrabold px-10 pt-20 text-5xl'>All classes</h3>
-            </div> */}
             <div>
-                <h3 className='font-monoton opacity-10 mt-10 px-10  text-gray-500'>ALL CLASSES</h3>
+                <h3 className='font-monoton opacity-10 pt-32 px-10  text-gray-500'>ALL CLASSES</h3>
             </div>
-            <div className='grid grid-cols-4 gap-6 px-10 pt-3'>
+
+
+            {/* implement tabs here */}
+
+            <Tabs className='md:mt-20 mt-5 w-[90%] mx-auto ' selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)} id="controlled-tabs" selectedTabClassName="bg-slate-50  transition-all duration-500 rounded-lg border-b-2  border-red-400 px-3 hidden md:inline-block mr-2 text-gray-600 py-0">
+
+                <TabList className='md:ml-10 ml-0 md:pb-10 pb-2 hover:cursor-pointer ' >
+                    {
+                        categoriesAr.map(category => <Tab tabindex="-1"
+                            className=' focus:rounded-lg focus:border-b focus:border-red-500 px-3 hidden md:inline-block mr-2 font-medium text-gray-900 py-2.5 '
+                            key={category.id}
+                        >
+                            {category.title}
+                        </Tab>)
+                    }
+
+                </TabList>
+
+                {/* main content */}
                 {
-                    all_Classes?.map(c => <ApprovedClass 
-                        key={c._id} 
-                        cls={c}
-                        isAdmin={isAdmin} 
+                    classesOfCategories.map((cls, index) => <TabPanel key={index}><CategoryTabPanel
+                        classesByCategory={cls}
+                        classesOfCategories={classesOfCategories}
+                        isAdmin={isAdmin}
                         isInstructor={isInstructor}
-                        refetch={refetch}
-                    ></ApprovedClass>)
+
+                    ></CategoryTabPanel> </TabPanel>)
                 }
 
+            </Tabs>
 
-            </div>
+
+            
+
+
         </div>
     );
 };

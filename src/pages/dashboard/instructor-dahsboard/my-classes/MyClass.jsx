@@ -36,16 +36,16 @@ const MyClass = ({ cls, index, handleDelete }) => {
                 }
             </td>
             <th className='  w-20 '>
-                <div className='flex items-center gap-6'>
-                    <div className='flex-grow '>
+                <div className='flex items-center  gap-6'>
+                    <div className='flex-grow w-32  flex justify-end'>
                         {
                             status === 'pending' && <button className="btn btn-outline btn-xs  text-blue-700">pending</button>
                         }
                         {
-                            status === 'denied' && <button className="btn btn-outline btn-xs mt-6 text-red-700">denied</button>
+                            status === 'denied' && <button className="btn btn-outline btn-xs text-red-700">denied</button>
                         }
                         {
-                            status === 'approved' && <button className="btn btn-outline btn-xs mt-6 text-green-700">approved</button>
+                            status === 'approved' && <button className="btn btn-outline btn-xs text-green-700">approved</button>
                         }
                     </div>
                     <button onClick={() => handleDelete(_id)} className=' text-red-700 text-base'><FaTrashAlt /></button>

@@ -26,12 +26,27 @@ const useAxiosSecure = () => {
         axiosSecure.interceptors.response.use(
             (response) => response,
             async (error) => {
-                // if( location.pathname === '/all-approved-classes' ){
-                //     navigate('/all-approved-classes');
-                // }
+                
+                // if student and not admin and 
+                console.log(error)
                 if (error.response && (error.response.status === 401 || error.response.status === 403)) {
-                    await logOut();
-                    navigate('/login');
+                    console.log(error)
+                    if( location.pathname !== '/all-approved-classes' ){
+                        await logOut();
+                        navigate('/signup');
+                    }
+                    else {
+                        return {error: true}
+                    }
+
+                    /** if(location.pathname === '/all-approved-classes'){
+                        console.log('hiiiiiiiii')
+                    }
+                    else{
+                        console.log("hello")
+                        await logOut();
+                        navigate('/');
+                    } */
                 }
                 return Promise.reject(error);
             }

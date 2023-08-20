@@ -1,11 +1,12 @@
 import { createContext, useEffect, useState } from "react";
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 import axios from "axios";
 import { app } from "../firebase/firebase.config";
-
 export const AuthContext = createContext(null);
 
 const auth = getAuth(app);
+export const db = getFirestore(app);
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -23,7 +24,7 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
-    const googleSignIn = () =>{
+    const googleSignIn = () => {
         setLoading(true);
         return signInWithPopup(auth, googleProvider);
     }
@@ -35,6 +36,7 @@ const AuthProvider = ({ children }) => {
 
     const updateUserProfile = (name, photo) => {
         console.log(photo)
+        setLoading(true);
         return updateProfile(auth.currentUser, {
             displayName: name, photoURL: photo
         });
@@ -43,23 +45,24 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
-            setLoading(false);
             console.log('current user', currentUser);
 
             // get and set token
-            if(currentUser){
-                axios.post('http://localhost:5000/jwt', {email: currentUser.email})
-                .then(data =>{
-                    // console.log(data.data.token)
-                    localStorage.setItem('access-token', data.data.token)
-                    setLoading(false);
-                })
+            if (currentUser) {
+                setLoading(false);
+               
+                axios.post('http://localhost:5000/jwt', { email: currentUser.email })
+                    .then(data => {
+                        // console.log(data.data.token)
+                        localStorage.setItem('access-token', data.data.token)
+                        setLoading(false);
+                    })
             }
-            else{
+            else {
                 localStorage.removeItem('access-token')
             }
 
-            
+
         });
         return () => {
             return unsubscribe();

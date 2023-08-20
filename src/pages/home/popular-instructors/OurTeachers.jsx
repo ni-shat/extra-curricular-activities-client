@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 const OurTeachers = () => {
 
+   
 
     return (
         <div className='mt-24 font-roboto'>
@@ -70,16 +71,14 @@ const OurTeachers = () => {
                         </div>
 
                     </div>
+                    <div data-aos="fade-up" className='mr-20 mt-8'>
+                        <Link to='/instructors' className='btn btn-lg bg-transparent border-2 px-10 ml-2 rounded-full text-gray-800 hover:bg-white hover:text-red-600'>
+                            view more
+                        </Link>
+                    </div>
                 </div>
             </div>
-            <div className='-mt-10 flex items-center justify-between'>
-                <h3 className='font-monoton  opacity-10 text-gray-500  whitespace-nowrap'> <span>Popular </span>  <span>instructor</span> </h3>
-                <div className='mr-20'>
-                    <Link to='/instructors' className='btn btn-lg bg-transparent border-2 px-10 ml-2 rounded-full text-gray-800 hover:bg-white hover:text-red-600'>
-                        view more 
-                    </Link>
-                </div>
-            </div>
+
             <TeacherSlider></TeacherSlider>
 
         </div>

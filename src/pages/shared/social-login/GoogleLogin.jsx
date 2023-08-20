@@ -34,12 +34,13 @@ const GoogleLogin = () => {
     }
 
     return (
-        <div>
-            <div className="divider mt-10">OR</div>
-            <div className="w-full flex justify-center my-4">
-                <button onClick={handleGoogleSignIn} className='flex text-black text-center   items-center gap-2 btn border-gray-500  hover:bg-gray-200 bg-white'> <span>Sign in with google</span>  <img className='w-7 h-7' src={ggl} alt="" /></button>
-            </div>
-        </div>
+        // <div>
+            <img onClick={handleGoogleSignIn} className='w-14 h-14 p-2 border hover:bg-gray-100 hover:cursor-pointer hover:border-red-400 border-gray-400 rounded-full' src={ggl} alt="" />
+            // <div className="divider mt-10">OR</div>
+            // <div className="w-full flex justify-center my-4">
+            //     <button onClick={handleGoogleSignIn} className='flex text-black text-center   items-center gap-2 btn border-gray-500  hover:bg-gray-200 bg-white'> <span>Sign in with google</span>  <img className='w-7 h-7' src={ggl} alt="" /></button>
+            // </div>
+        // </div>
     );
 };
 

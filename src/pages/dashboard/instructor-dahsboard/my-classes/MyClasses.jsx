@@ -34,7 +34,7 @@ const MyClasses = () => {
 
     return (
            <div className='w-full pl-16 pr-20 mt-32  '>
-            <div className="overflow-scroll h-screen ">
+            <div className=" h-screen ">
                 <table className="table table-pin-rows ">
                     {/* head */}
                     <thead className='z-10'>

@@ -20,6 +20,10 @@ import DashboardPrivateRoute from "./DashboardPrivateRoute";
 import ManageClasses from "../pages/dashboard/admin-dashboard/manage-classes/ManageClasses";
 import Payment from "../pages/dashboard/student-dashboard/payment/Payment";
 import PaymentHistory from "../pages/dashboard/student-dashboard/payment/PaymentHistory";
+import AdminUserHome from "../pages/dashboard/admin-dashboard/home/adminUserHome";
+import StudentStatus from "../pages/dashboard/student-dashboard/status/StudentStatus";
+import MessageNotification from "../pages/dashboard/admin-dashboard/manage-classes/MessageNotification";
+import ChatBox from "../components/ChatBox";
 
 
 export const router = createBrowserRouter([
@@ -32,10 +36,6 @@ export const router = createBrowserRouter([
             element: <Home></Home>
         },  
         {
-          path: 'login',
-          element: <Login></Login>
-        },
-        {
           path: 'signup',
           element: <SignUp></SignUp>
         },    
@@ -47,12 +47,20 @@ export const router = createBrowserRouter([
           path: 'all-approved-classes',
           element: <AllApprovedClasses></AllApprovedClasses>
         },    
+        {
+          path: 'msg',
+          element: <ChatBox></ChatBox>
+        },    
       ]
     },
     {
       path: 'dashboard',
       element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
       children: [
+        {
+          path: 'admin-userhome',
+          element: <PrivateRoute><AdminUserHome></AdminUserHome></PrivateRoute>
+        },
         {
           path: 'userhome',
           element: <PrivateRoute><UserHome></UserHome></PrivateRoute>
@@ -66,12 +74,20 @@ export const router = createBrowserRouter([
           element: <DashboardPrivateRoute><EnrolledClasses></EnrolledClasses></DashboardPrivateRoute>
         },
         {
+          path: 'student-status',
+          element: <DashboardPrivateRoute><StudentStatus></StudentStatus></DashboardPrivateRoute>
+        },
+        {
           path: 'manage-users', 
           element: <DashboardPrivateRoute><AllUsers></AllUsers></DashboardPrivateRoute>
         },
         {
           path: 'manage-classes', 
           element: <DashboardPrivateRoute><ManageClasses></ManageClasses></DashboardPrivateRoute>
+        },
+        {
+          path: 'message-notification', 
+          element: <DashboardPrivateRoute><MessageNotification></MessageNotification></DashboardPrivateRoute>
         },
         {
           path: 'add-class', 

@@ -37,7 +37,7 @@ const Instructors = () => {
     return (
         <div>
             <div className='absolute top-0 bg-transparent w-full'>
-                <Navbar></Navbar>
+                {/* <Navbar></Navbar> */}
             </div>
             
             <div className='bg-white'>
@@ -45,8 +45,8 @@ const Instructors = () => {
                     <div className="hero-overlay bg-black bg-opacity-60"></div>
                     <div className="flex justify-start mt-16 w-[80%] text-white font-roboto ">
                         <div className="">
-                            <h1 className="mb-5 leading-[60px] text-5xl font-bold">An ensemble of music <br /> professionals.</h1>
-                            <p className="mb-5 text-xl">Enrich Your Musical Education with Our Skilled Instructors.</p>
+                            <h1 className="mb-5 leading-[60px] text-5xl font-bold">An ensemble of professionals.</h1>
+                            <p className="mb-5 text-xl mr-64">Get to know the talented and dedicated instructors who are passionate about sharing their knowledge and expertise with you.</p>
                         </div>
                     </div>
                 </div>
